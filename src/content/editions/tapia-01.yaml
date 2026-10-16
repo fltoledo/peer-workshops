@@ -1,4 +1,4 @@
-# TODO: confirmar día exacto, organizadores y tema; agregar fotos, participantes y temas tratados.
+# TODO: confirmar día exacto y tema; agregar fotos, participantes y temas tratados.
 series: tapia
 title: "TAPIA #01"
 number: 1
@@ -6,7 +6,7 @@ date: 2026-09-01
 city: Buenos Aires
 country: AR
 host: Crowdar
-organizers: [Federico Toledo]
+organizers: [Federico Toledo, Karime Salomon]
 status: past
 theme:
   en: Testing AI-based systems
