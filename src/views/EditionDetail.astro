@@ -1,6 +1,7 @@
 ---
 import { Picture, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { LANG_META, UI, countryName, lp, type Lang } from '../i18n';
 import { editionLanguage, editionTheme, editionWhen, editionWhere, getSeriesMap, participantCount, seriesVars, tx, type Edition } from '../lib';
 
@@ -41,6 +42,8 @@ const series = (await getSeriesMap()).get(edition.data.series.id)!;
 const d = edition.data;
 const deadline = d.applyDeadline?.toLocaleDateString(LANG_META[lang].intl, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const theme = editionTheme(edition, lang);
+// Foto de fondo del encabezado: `cover` o la primera de la galería.
+const cover = d.cover ?? d.photos[0]?.src;
 
 // Versión grande y optimizada de cada foto, para el enlace "ver en tamaño completo".
 const photos = await Promise.all(
@@ -60,11 +63,34 @@ const count = participantCount(edition);
   title={d.title}
   description={`${d.title}${theme ? `: ${theme}` : ''}. ${editionWhere(edition, lang)}, ${editionWhen(edition, lang)}.`}
 >
-  <header class="page-head wrap series-scope" style={seriesVars(series)}>
-    <p class="eyebrow"><a class="series-text" href={lp(lang, `/series/${series.id}`)} style="text-decoration: none">{series.data.name}</a></p>
-    <h1>{d.title}</h1>
-    {theme && <p>{theme}</p>}
-    <span class={`badge badge-${d.status}`}>{UI[lang].status[d.status]}</span>
+  <header class={cover ? 'hero hero-photo edition-hero series-scope' : 'page-head wrap series-scope'} style={seriesVars(series)}>
+    {cover && (
+      <Picture
+        class="hero-bg"
+        src={cover}
+        alt=""
+        formats={['avif', 'webp']}
+        widths={[640, 1024, 1600, 2400]}
+        width={1600}
+        sizes="100vw"
+        quality={60}
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+    <div class={cover ? 'wrap hero-inner' : undefined}>
+      <Breadcrumbs
+        lang={lang}
+        items={[
+          { href: lp(lang, '/editions'), label: UI[lang].nav.editions },
+          { href: lp(lang, `/series/${series.id}`), label: series.data.name },
+        ]}
+        current={d.title}
+      />
+      <h1>{d.title}</h1>
+      {theme && <p class="lead">{theme}</p>}
+      <span class={`badge badge-${d.status}`}>{UI[lang].status[d.status]}</span>
+    </div>
   </header>
 
   <div class="wrap">

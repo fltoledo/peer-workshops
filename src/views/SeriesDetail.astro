@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import EditionItem from '../components/EditionItem.astro';
-import { type Lang } from '../i18n';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { UI, lp, type Lang } from '../i18n';
 import { getEditions, seriesVars, type Series } from '../lib';
 
 interface Props {
@@ -16,6 +17,7 @@ const editions = (await getEditions()).filter((e) => e.data.series.id === series
 ---
 <Base lang={lang} path={`/series/${series.id}`} title={s.name} description={s.summary[lang]}>
   <header class="page-head wrap">
+    <Breadcrumbs lang={lang} items={[{ href: lp(lang, '/editions'), label: UI[lang].nav.editions }]} current={s.name} />
     <p class="eyebrow series-scope series-text" style={seriesVars(series)}>{s.fullName[lang]}</p>
     <h1>{s.name}</h1>
     <p>{s.summary[lang]}</p>

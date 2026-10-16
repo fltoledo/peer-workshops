@@ -1,4 +1,4 @@
-# TODO: confirmar día exacto y tema; agregar fotos, participantes y temas tratados.
+# TODO: confirmar día exacto y tema; agregar participantes y temas tratados.
 series: tapia
 title: "TAPIA #01"
 number: 1
@@ -13,14 +13,23 @@ theme:
   es: Pruebas de sistemas con IA
   pt: Testes de sistemas com IA
 
-# Ejemplo de cómo cargar fotos, participantes y temas (borrá los # para usarlos):
+photos:
+  - src: ../../assets/2026-tapia.jpeg
+    alt:
+      en: TAPIA #01 participants around tables in a U shape, listening to a presenter seated at the front of the room
+      es: Participantes del TAPIA #01 en mesas en U escuchando a una presentadora sentada al frente de la sala
+      pt: Participantes do TAPIA #01 em mesas em U ouvindo uma apresentadora sentada à frente da sala
+  - src: ../../assets/2026-tapia-2.jpg
+    alt:
+      en: Smiling group photo of TAPIA #01 participants in Buenos Aires
+      es: Foto grupal y sonriente de quienes participaron del TAPIA #01 en Buenos Aires
+      pt: Foto do grupo sorridente de participantes do TAPIA #01 em Buenos Aires
+
+# Ejemplo de cómo cargar resumen, participantes y temas (borrá los # para usarlos):
 # summary:
 #   en: Two sentences about how it went.
 #   es: Dos oraciones sobre cómo salió.
 #   pt: Duas frases sobre como foi.
-# photos:
-#   - src: ./tapia-01/grupo.jpg       # la foto va en src/content/editions/tapia-01/
-#     alt: Grupo de participantes del TAPIA #01 en Buenos Aires
 # participants:
 #   - name: Federico Toledo
 #     org: Abstracta

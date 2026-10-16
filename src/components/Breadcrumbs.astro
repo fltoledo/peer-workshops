@@ -1,0 +1,21 @@
+---
+import { type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Enlaces anteriores a la página actual. */
+  items: { href: string; label: string }[];
+  /** Nombre de la página actual (sin enlace). */
+  current: string;
+}
+const { lang, items, current } = Astro.props;
+const LABEL = { en: 'Breadcrumb', es: 'Ruta de navegación', pt: 'Trilha de navegação' };
+---
+<nav class="breadcrumbs" aria-label={LABEL[lang]}>
+  <ol>
+    {items.map((item) => (
+      <li><a href={item.href}>{item.label}</a></li>
+    ))}
+    <li><span aria-current="page">{current}</span></li>
+  </ol>
+</nav>

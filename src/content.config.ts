@@ -58,6 +58,8 @@ const editions = defineCollection({
       // Resumen de lo que pasó (opcional)
       summary: localized.optional(),
       // Fotos: rutas relativas a este archivo, p. ej. ./wopr-latam-02/grupo.jpg
+      // Foto de fondo del encabezado (si no se indica, se usa la primera de `photos`)
+      cover: image().optional(),
       photos: z
         .array(z.object({ src: image(), alt: text, caption: text.optional() }))
         .default([]),

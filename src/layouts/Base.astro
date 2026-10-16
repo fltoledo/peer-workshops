@@ -14,7 +14,8 @@ interface Props {
 const { lang, path, title, description } = Astro.props;
 const t = UI[lang];
 const pageTitle = title ? `${title} · ${SITE.name}` : SITE.name;
-const isActive = (p: string) => (p === '/' ? path === '/' : path.startsWith(p));
+const isActive = (p: string) =>
+  p === '/' ? path === '/' : path.startsWith(p) || (p === '/editions' && path.startsWith('/series'));
 const site = Astro.site?.origin ?? '';
 ---
 <!doctype html>

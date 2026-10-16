@@ -1206,3 +1206,64 @@ main:focus {
   margin: 0;
   padding-left: 1.1em;
 }
+
+/* Edition page header with a photo */
+.edition-hero {
+  padding-top: 72px;
+  padding-bottom: 56px;
+  margin-bottom: 0;
+}
+
+.edition-hero .lead {
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+}
+
+/* On the dark overlay, use the series color meant for dark backgrounds */
+.hero-photo.series-scope {
+  --series-color: var(--sc-dark);
+}
+
+.hero-photo .badge {
+  background: rgb(255 255 255 / 0.9);
+  color: #1d1b18;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li {
+  margin: 0;
+  color: var(--muted);
+}
+
+.breadcrumbs li + li::before {
+  content: '›';
+  margin: 0 8px;
+  color: var(--muted);
+}
+
+.breadcrumbs a {
+  color: var(--accent);
+}
+
+.hero-photo .breadcrumbs li,
+.hero-photo .breadcrumbs li + li::before {
+  color: #ece7de;
+}
+
+.hero.hero-photo .breadcrumbs a {
+  color: #fff;
+}
