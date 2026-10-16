@@ -1,6 +1,7 @@
 name: WOPR Latam
 acronym: WOPR
 order: 1
+website: https://performance-workshop.org/
 # Color de texto en modo claro y oscuro (ambos con contraste AA ≥ 4.5:1)
 color: "#2f5bea"
 colorDark: "#7d9bff"

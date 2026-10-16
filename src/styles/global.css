@@ -1176,3 +1176,10 @@ main:focus {
   font-size: 0.85rem;
   color: var(--muted);
 }
+
+/* <picture> wraps each optimized photo: make it a block so the <img> fills its grid cell */
+.gallery picture,
+.kcards-photos picture,
+.hero-photo picture {
+  display: block;
+}

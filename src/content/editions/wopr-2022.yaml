@@ -1,14 +1,23 @@
-# TODO: confirmar número de WOPR, mes y tema.
 series: wopr
-title: "WOPR · Montevideo 2022"
-date: 2022-01-01
-datePrecision: year
+title: "WOPR 29"
+number: 29
+date: 2022-12-06
 city: Montevideo
 country: UY
 host: Abstracta
+contentOwner: Andy Hohenner
 language: en
 myRole: host
 status: past
+url: https://performance-workshop.org/wopr29/
+theme:
+  en: Iterative Performance Testing
+  es: Pruebas de performance iterativas
+  pt: Testes de performance iterativos
+summary:
+  en: How do faster release cycles, observability and synthetic monitoring change performance testing practices that were designed for slower releases? The first WOPR held in Latin America, in English.
+  es: ¿Cómo cambian los ciclos de entrega más rápidos, la observabilidad y el monitoreo sintético las prácticas de pruebas de performance pensadas para releases más lentos? El primer WOPR realizado en Latinoamérica, en inglés.
+  pt: Como ciclos de entrega mais rápidos, observabilidade e monitoramento sintético mudam as práticas de testes de performance pensadas para releases mais lentos? O primeiro WOPR realizado na América Latina, em inglês.
 photos:
   - src: ../../assets/2022.jpeg
     alt:

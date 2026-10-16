@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import kFront from '../assets/k-cards.jpeg';
 import kBack from '../assets/k-cards-back.jpeg';
@@ -15,7 +15,7 @@ const T = {
     title: 'The format',
     description: 'How a peer workshop works: experience reports, K-Card facilitation and the three-day agenda.',
     h1: 'A workshop among peers',
-    lead: 'Every edition follows the format of LAWST (Los Altos Workshop on Software Testing), the same one WOPR has used since 2003. It has been refined over more than twenty years so that a group of practitioners can truly learn from each other’s experiences.',
+    lead: 'Every edition follows a format inspired by LAWST (Los Altos Workshop on Software Testing), the same one the <a href="https://performance-workshop.org/" target="_blank" rel="noopener">WOPR</a> (Workshop on Performance and Reliability) has used since 2003. It has been refined over more than twenty years so that a group of practitioners can truly learn from each other’s experiences.',
     essentialsTitle: 'The essentials',
     essentials: [
       '<strong>Small group:</strong> up to 20 participants. We tried 25 and it was harder to keep the conversations in order.',
@@ -61,7 +61,7 @@ const T = {
     title: 'El formato',
     description: 'Cómo funciona un peer workshop: reportes de experiencia, moderación con K-Cards y la agenda de los tres días.',
     h1: 'Un taller entre pares',
-    lead: 'Todas las ediciones siguen el formato de LAWST (Los Altos Workshop on Software Testing), el mismo que usa el WOPR desde 2003. Se fue afinando durante más de veinte años para que un grupo de especialistas aprenda de verdad de las experiencias de los demás.',
+    lead: 'Todas las ediciones siguen un formato inspirado en LAWST (Los Altos Workshop on Software Testing), el mismo que usa el <a href="https://performance-workshop.org/" target="_blank" rel="noopener">WOPR</a> (Workshop on Performance and Reliability) desde 2003. Se fue afinando durante más de veinte años para que un grupo de especialistas aprenda de verdad de las experiencias de los demás.',
     essentialsTitle: 'Lo esencial',
     essentials: [
       '<strong>Grupo chico:</strong> hasta 20 participantes. Probamos con 25 y costó más mantener el orden de las conversaciones.',
@@ -107,7 +107,7 @@ const T = {
     title: 'O formato',
     description: 'Como funciona um peer workshop: relatos de experiência, facilitação com K-Cards e a agenda dos três dias.',
     h1: 'Um workshop entre pares',
-    lead: 'Todas as edições seguem o formato do LAWST (Los Altos Workshop on Software Testing), o mesmo usado pelo WOPR desde 2003. Ele foi aperfeiçoado ao longo de mais de vinte anos para que um grupo de especialistas aprenda de verdade com as experiências dos outros.',
+    lead: 'Todas as edições seguem um formato inspirado no LAWST (Los Altos Workshop on Software Testing), o mesmo usado pelo <a href="https://performance-workshop.org/" target="_blank" rel="noopener">WOPR</a> (Workshop on Performance and Reliability) desde 2003. Ele foi aperfeiçoado ao longo de mais de vinte anos para que um grupo de especialistas aprenda de verdade com as experiências dos outros.',
     essentialsTitle: 'O essencial',
     essentials: [
       '<strong>Grupo pequeno:</strong> até 20 participantes. Testamos com 25 e foi mais difícil manter a ordem das conversas.',
@@ -156,7 +156,7 @@ const t = T[lang];
   <header class="page-head wrap">
     <p class="eyebrow">{t.title}</p>
     <h1>{t.h1}</h1>
-    <p>{t.lead}</p>
+    <p set:html={t.lead} />
   </header>
 
   <div class="wrap prose">
@@ -179,8 +179,8 @@ const t = T[lang];
       ))}
     </ul>
     <div class="kcards-photos">
-      <Image src={kFront} alt={t.photoFront} widths={[400, 800, 1200]} sizes="(max-width: 760px) 100vw, 540px" />
-      <Image src={kBack} alt={t.photoBack} widths={[400, 800, 1200]} sizes="(max-width: 760px) 100vw, 540px" />
+      <Picture src={kFront} alt={t.photoFront} formats={['avif', 'webp']} widths={[400, 640, 1040]} width={640} sizes="(max-width: 760px) calc(100vw - 40px), 520px" quality={65} loading="lazy" />
+      <Picture src={kBack} alt={t.photoBack} formats={['avif', 'webp']} widths={[400, 640, 1040]} width={640} sizes="(max-width: 760px) calc(100vw - 40px), 520px" quality={65} loading="lazy" />
     </div>
     <p>{t.kMore}</p>
 

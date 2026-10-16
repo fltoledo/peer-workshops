@@ -13,6 +13,7 @@ const series = defineCollection({
     name: z.string(),
     acronym: z.string(),
     order: z.number().default(99),
+    website: z.string().url().optional(),
     // Color de texto en modo claro y en modo oscuro (ambos deben dar contraste AA ≥ 4.5:1)
     color: z.string(),
     colorDark: z.string(),
@@ -38,6 +39,9 @@ const editions = defineCollection({
       country: z.string().length(2).optional(), // código ISO: UY, AR, BR, US...
       host: z.string().optional(),
       organizers: z.array(z.string()).default([]),
+      contentOwner: z.string().optional(),
+      // Página oficial de la edición, si existe
+      url: z.string().url().optional(),
       // Idioma en el que se hizo la edición
       language: z.enum(['es', 'en', 'pt']).default('es'),
       // Rol de Federico en la edición

@@ -10,6 +10,7 @@ interface Props {
 }
 const { lang, series } = Astro.props;
 const T = { en: 'Editions', es: 'Ediciones', pt: 'Edições' };
+const SITE_LABEL = { en: 'Official WOPR website', es: 'Sitio oficial del WOPR', pt: 'Site oficial do WOPR' };
 const s = series.data;
 const editions = (await getEditions()).filter((e) => e.data.series.id === series.id);
 ---
@@ -22,6 +23,7 @@ const editions = (await getEditions()).filter((e) => e.data.series.id === series
   <div class="wrap">
     <div class="prose">
       {s.about[lang].map((p) => <p>{p}</p>)}
+      {s.website && <p><a href={s.website} target="_blank" rel="noopener">{SITE_LABEL[lang]}</a></p>}
     </div>
     <h2>{T[lang]}</h2>
     <ul class="edition-list">

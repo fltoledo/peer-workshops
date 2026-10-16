@@ -34,7 +34,7 @@ Copiá un archivo de `src/content/editions/` y cambiá los datos:
 Después de la edición podés sumar (ver el ejemplo comentado en `tapia-01.yaml`):
 
 - `summary`: un resumen breve en los tres idiomas.
-- `photos`: guardá las fotos en una carpeta con el nombre de la edición (por ejemplo `src/content/editions/tapia-01/`) y referencialas como `./tapia-01/foto.jpg`. Cada foto necesita `alt` (texto alternativo); `caption` es opcional. El sitio las optimiza solo, así que podés subirlas tal como salen del celular.
+- `photos`: guardá las fotos en una carpeta con el nombre de la edición (por ejemplo `src/content/editions/tapia-01/`) y referencialas como `./tapia-01/foto.jpg`. Cada foto necesita `alt` (texto alternativo); `caption` es opcional. El sitio genera versiones AVIF y WebP en varios tamaños, así que cada visitante descarga solo lo que necesita. Para que el repositorio no crezca de más, conviene guardar los originales en JPEG de hasta 2560 px de lado (en Mac: `sips -Z 2560 -s format jpeg -s formatOptions 85 foto.jpg --out foto.jpg`).
 - `participants`: `name` y, opcionales, `org`, `country` y `url`. Publicá solo a quienes dieron su consentimiento.
 - `topics`: los temas tratados, con `presenter` opcional.
 
