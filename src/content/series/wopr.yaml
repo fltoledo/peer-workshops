@@ -1,0 +1,24 @@
+name: WOPR
+acronym: WOPR
+order: 3
+# Color de texto en modo claro y oscuro (ambos con contraste AA ≥ 4.5:1)
+color: "#6a3fd1"
+colorDark: "#b9a2ff"
+fullName:
+  en: Workshop on Performance and Reliability (original)
+  es: Workshop on Performance and Reliability (original)
+  pt: Workshop on Performance and Reliability (original)
+summary:
+  en: The original WOPR, held in English since 2003. In 2022 it came to Latin America for the first time.
+  es: El WOPR original, que se realiza en inglés desde 2003. En 2022 llegó por primera vez a Latinoamérica.
+  pt: O WOPR original, realizado em inglês desde 2003. Em 2022 chegou pela primeira vez à América Latina.
+about:
+  en:
+    - "WOPR started in 2003 in New York and is the reference peer workshop for the performance, observability and SRE community. Its editions are run in English and have been hosted by companies such as Google, Microsoft, Facebook, Salesforce, eBay and BlazeMeter."
+    - "In 2022 it was held in Latin America for the first time, in Montevideo, with Abstracta and Federico Toledo as hosts. That edition paved the way for WOPR Latam."
+  es:
+    - "El WOPR nació en 2003 en Nueva York y es el peer workshop de referencia para la comunidad de performance, observabilidad y SRE. Sus ediciones se hacen en inglés y fueron hosteadas por empresas como Google, Microsoft, Facebook, Salesforce, eBay y BlazeMeter."
+    - "En 2022 se hizo por primera vez en Latinoamérica, en Montevideo, con Abstracta y Federico Toledo como hosts. Esa edición abrió el camino para el WOPR Latam."
+  pt:
+    - "O WOPR nasceu em 2003, em Nova York, e é o peer workshop de referência para a comunidade de performance, observabilidade e SRE. Suas edições são realizadas em inglês e já foram sediadas por empresas como Google, Microsoft, Facebook, Salesforce, eBay e BlazeMeter."
+    - "Em 2022 foi realizado pela primeira vez na América Latina, em Montevidéu, com a Abstracta e Federico Toledo como hosts. Essa edição abriu o caminho para o WOPR Latam."

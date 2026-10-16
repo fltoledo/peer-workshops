@@ -1171,3 +1171,8 @@ main:focus {
   height: auto;
   border-radius: var(--radius);
 }
+
+.edition .lang-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}

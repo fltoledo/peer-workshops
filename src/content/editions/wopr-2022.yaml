@@ -1,0 +1,27 @@
+# TODO: confirmar número de WOPR, mes y tema.
+series: wopr
+title: "WOPR · Montevideo 2022"
+date: 2022-01-01
+datePrecision: year
+city: Montevideo
+country: UY
+host: Abstracta
+language: en
+myRole: host
+status: past
+photos:
+  - src: ../../assets/2022.jpeg
+    alt:
+      en: A presenter stands next to a slide titled “Experience Report” while participants listen around tables in a U shape
+      es: Un presentador de pie junto a una diapositiva que dice “Experience Report”, mientras los participantes escuchan en mesas en U
+      pt: Um apresentador em pé ao lado de um slide com o título “Experience Report”, enquanto os participantes escutam em mesas em U
+  - src: ../../assets/2022-4.jpeg
+    alt:
+      en: Two people standing at the front of the room address the group seated around the tables
+      es: Dos personas de pie al frente de la sala le hablan al grupo sentado alrededor de las mesas
+      pt: Duas pessoas em pé à frente da sala falam com o grupo sentado ao redor das mesas
+  - src: ../../assets/2022-2.jpeg
+    alt:
+      en: Wide view of the room with participants seated in a U shape facing a presenter and the projected slides
+      es: Vista amplia de la sala con participantes sentados en U frente a un presentador y la proyección
+      pt: Vista ampla da sala com participantes sentados em U diante de um apresentador e da projeção

@@ -38,6 +38,10 @@ const editions = defineCollection({
       country: z.string().length(2).optional(), // código ISO: UY, AR, BR, US...
       host: z.string().optional(),
       organizers: z.array(z.string()).default([]),
+      // Idioma en el que se hizo la edición
+      language: z.enum(['es', 'en', 'pt']).default('es'),
+      // Rol de Federico en la edición
+      myRole: z.enum(['organizer', 'host']).default('organizer'),
       theme: localized.optional(),
       // planned: anunciada · open: convocatoria abierta · closed: postulaciones cerradas · past: ya se hizo
       status: z.enum(['planned', 'open', 'closed', 'past']),

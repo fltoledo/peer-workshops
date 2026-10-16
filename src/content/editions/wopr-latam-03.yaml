@@ -11,3 +11,14 @@ theme:
   en: Performance testing failures
   es: Fracasos de pruebas de performance
   pt: Fracassos em testes de performance
+photos:
+  - src: ../../assets/2025-lima-2.png
+    alt:
+      en: Participants around tables in a U shape listening to a seated presenter in front of a slide titled “Performance en tierra de nadie, cuando la verdad incomoda”
+      es: Participantes en mesas en U escuchando a un presentador sentado frente a la diapositiva “Performance en tierra de nadie, cuando la verdad incomoda”
+      pt: Participantes em mesas em U ouvindo um apresentador sentado diante do slide “Performance en tierra de nadie, cuando la verdad incomoda”
+  - src: ../../assets/2025-lima.jpeg
+    alt:
+      en: The group follows a presenter sharing his learnings from a chair at the front of the room
+      es: El grupo sigue a un presentador que comparte sus aprendizajes sentado al frente de la sala
+      pt: O grupo acompanha um apresentador que compartilha seus aprendizados sentado à frente da sala

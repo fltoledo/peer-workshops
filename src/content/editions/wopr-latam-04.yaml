@@ -11,3 +11,19 @@ theme:
   en: Observability
   es: Observabilidad
   pt: Observabilidade
+photos:
+  - src: ../../assets/2025-3.jpg
+    alt:
+      en: View of the room with tables in a U shape and participants in conversation during WOPR Latam #04 in Montevideo
+      es: Vista de la sala con las mesas en U y participantes conversando durante el WOPR Latam #04 en Montevideo
+      pt: Vista da sala com as mesas em U e participantes conversando durante o WOPR Latam #04 em Montevidéu
+  - src: ../../assets/2025.jpg
+    alt:
+      en: Group photo of WOPR Latam #04 participants on a staircase
+      es: Foto grupal de quienes participaron del WOPR Latam #04 en una escalera
+      pt: Foto do grupo de participantes do WOPR Latam #04 em uma escadaria
+  - src: ../../assets/2025-2.jpeg
+    alt:
+      en: A participant presents his experience report in front of a slide with oil pumps while the group listens
+      es: Un participante presenta su reporte de experiencia frente a una diapositiva con bombas de petróleo mientras el grupo escucha
+      pt: Um participante apresenta seu relato de experiência diante de um slide com bombas de petróleo enquanto o grupo escuta

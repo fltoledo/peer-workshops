@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { UI, countryName, formatMonth, type Lang, type Localized } from './i18n';
+import { UI, countryName, formatMonth, languageName, type Lang, type Localized } from './i18n';
 
 export type Edition = CollectionEntry<'editions'>;
 export type Series = CollectionEntry<'series'>;
@@ -43,7 +43,11 @@ export const editionWhere = (e: Edition, lang: Lang) => {
   return [city, country && countryName(country, lang)].filter(Boolean).join(', ');
 };
 
-export const editionTheme = (e: Edition, lang: Lang) => e.data.theme?.[lang] ?? UI[lang].tbd.theme;
+// Una edición ya realizada sin tema cargado no muestra "a definir".
+export const editionTheme = (e: Edition, lang: Lang) =>
+  e.data.theme?.[lang] ?? (e.data.status === 'past' ? '' : UI[lang].tbd.theme);
+
+export const editionLanguage = (e: Edition, lang: Lang) => languageName(e.data.language, lang);
 
 export const participantCount = (e: Edition) => e.data.participantCount ?? e.data.participants.length;
 

@@ -2,7 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { LANG_META, UI, countryName, lp, type Lang } from '../i18n';
-import { editionTheme, editionWhen, editionWhere, getSeriesMap, participantCount, seriesVars, tx, type Edition } from '../lib';
+import { editionLanguage, editionTheme, editionWhen, editionWhere, getSeriesMap, participantCount, seriesVars, tx, type Edition } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -12,27 +12,27 @@ const { lang, edition } = Astro.props;
 
 const T = {
   en: {
-    facts: 'Edition details', when: 'When', where: 'Where', host: 'Host', organizers: 'Organizers', theme: 'Theme',
+    facts: 'Edition details', when: 'When', where: 'Where', host: 'Host', organizers: 'Organizers', theme: 'Theme', language: 'Language', role: 'Federico’s role',
     openTitle: 'Call open', deadline: 'Applications until', apply: 'Apply', ask: 'Ask us', guide: 'How to put together a good experience report →',
     plannedTitle: 'Coming soon', plannedText: 'Date, place and theme will be announced soon. The call is not open yet.', notify: 'Let me know when it opens',
     closedTitle: 'Applications closed', closedText: 'We are selecting participants. Subscribe to hear about the next edition.',
-    pastTitle: 'Edition held', pastText: 'Want to take part in the next edition of', notifyShort: 'Let me know',
+    pastTitle: 'Edition held', pastText: 'Want to take part in the next edition of', notifyShort: 'Let me know', hostedText: 'The regional continuation of this workshop, in Spanish, is', hostedLink: 'See WOPR Latam',
     summary: 'How it went', photos: 'Photos', openPhoto: 'open full size', participants: 'Participants', topics: 'Topics discussed', by: 'by',
   },
   es: {
-    facts: 'Datos de la edición', when: 'Cuándo', where: 'Dónde', host: 'Host', organizers: 'Organización', theme: 'Temática',
+    facts: 'Datos de la edición', when: 'Cuándo', where: 'Dónde', host: 'Host', organizers: 'Organización', theme: 'Temática', language: 'Idioma', role: 'Rol de Federico',
     openTitle: 'Convocatoria abierta', deadline: 'Postulaciones hasta el', apply: 'Postularme', ask: 'Consultar', guide: 'Cómo armar un buen reporte de experiencia →',
     plannedTitle: 'Próximamente', plannedText: 'Pronto anunciamos fecha, lugar y temática. La convocatoria todavía no está abierta.', notify: 'Avisame cuando abra',
     closedTitle: 'Postulaciones cerradas', closedText: 'Ya estamos seleccionando participantes. Suscribite para enterarte de la próxima edición.',
-    pastTitle: 'Edición realizada', pastText: '¿Querés participar en la próxima edición de', notifyShort: 'Avisame',
+    pastTitle: 'Edición realizada', pastText: '¿Querés participar en la próxima edición de', notifyShort: 'Avisame', hostedText: 'La continuidad regional de este taller, en español, es el', hostedLink: 'Ver WOPR Latam',
     summary: 'Cómo fue', photos: 'Fotos', openPhoto: 'ver en tamaño completo', participants: 'Participantes', topics: 'Temas tratados', by: 'por',
   },
   pt: {
-    facts: 'Dados da edição', when: 'Quando', where: 'Onde', host: 'Host', organizers: 'Organização', theme: 'Tema',
+    facts: 'Dados da edição', when: 'Quando', where: 'Onde', host: 'Host', organizers: 'Organização', theme: 'Tema', language: 'Idioma', role: 'Papel de Federico',
     openTitle: 'Inscrições abertas', deadline: 'Inscrições até', apply: 'Inscrever-me', ask: 'Fale com a gente', guide: 'Como montar um bom relato de experiência →',
     plannedTitle: 'Em breve', plannedText: 'Em breve anunciaremos data, local e tema. A chamada ainda não está aberta.', notify: 'Avise-me quando abrir',
     closedTitle: 'Inscrições encerradas', closedText: 'Estamos selecionando participantes. Inscreva-se para saber da próxima edição.',
-    pastTitle: 'Edição realizada', pastText: 'Quer participar da próxima edição do', notifyShort: 'Avise-me',
+    pastTitle: 'Edição realizada', pastText: 'Quer participar da próxima edição do', notifyShort: 'Avise-me', hostedText: 'A continuidade regional deste workshop, em espanhol, é o', hostedLink: 'Ver WOPR Latam',
     summary: 'Como foi', photos: 'Fotos', openPhoto: 'ver em tamanho real', participants: 'Participantes', topics: 'Temas discutidos', by: 'por',
   },
 };
@@ -58,12 +58,12 @@ const count = participantCount(edition);
   lang={lang}
   path={`/editions/${edition.id}`}
   title={d.title}
-  description={`${d.title}: ${theme}. ${editionWhere(edition, lang)}, ${editionWhen(edition, lang)}.`}
+  description={`${d.title}${theme ? `: ${theme}` : ''}. ${editionWhere(edition, lang)}, ${editionWhen(edition, lang)}.`}
 >
   <header class="page-head wrap series-scope" style={seriesVars(series)}>
     <p class="eyebrow"><a class="series-text" href={lp(lang, `/series/${series.id}`)} style="text-decoration: none">{series.data.name}</a></p>
     <h1>{d.title}</h1>
-    <p>{theme}</p>
+    {theme && <p>{theme}</p>}
     <span class={`badge badge-${d.status}`}>{UI[lang].status[d.status]}</span>
   </header>
 
@@ -76,7 +76,9 @@ const count = participantCount(edition);
           <dt>{t.where}</dt><dd>{editionWhere(edition, lang)}</dd>
           {d.host && <><dt>{t.host}</dt><dd>{d.host}</dd></>}
           {d.organizers.length > 0 && <><dt>{t.organizers}</dt><dd>{d.organizers.join(', ')}</dd></>}
-          <dt>{t.theme}</dt><dd>{theme}</dd>
+          {theme && <><dt>{t.theme}</dt><dd>{theme}</dd></>}
+          <dt>{t.language}</dt><dd>{editionLanguage(edition, lang)}</dd>
+          <dt>{t.role}</dt><dd>{UI[lang].myRole[d.myRole]}</dd>
           {count > 0 && <><dt>{t.participants}</dt><dd>{count}</dd></>}
         </dl>
       </div>
@@ -104,11 +106,18 @@ const count = participantCount(edition);
             <p class="muted">{t.closedText}</p>
           </>
         )}
-        {d.status === 'past' && (
+        {d.status === 'past' && d.myRole === 'organizer' && (
           <>
             <h2 class="h3">{t.pastTitle}</h2>
             <p class="muted">{t.pastText} {series.data.name}?</p>
             <a class="btn btn-ghost" href="#newsletter">{t.notifyShort}</a>
+          </>
+        )}
+        {d.status === 'past' && d.myRole === 'host' && (
+          <>
+            <h2 class="h3">{t.pastTitle}</h2>
+            <p class="muted">{t.hostedText} WOPR Latam.</p>
+            <a class="btn btn-ghost" href={lp(lang, '/series/wopr-latam')}>{t.hostedLink}</a>
           </>
         )}
       </div>

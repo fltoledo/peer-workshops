@@ -1,6 +1,6 @@
 ---
 import { UI, lp, type Lang } from '../i18n';
-import { editionTheme, editionWhen, editionWhere, seriesVars, type Edition, type Series } from '../lib';
+import { editionLanguage, editionTheme, editionWhen, editionWhere, seriesVars, type Edition, type Series } from '../lib';
 
 interface Props {
   lang: Lang;
@@ -19,7 +19,8 @@ const d = edition.data;
     </span>
     <span>
       <span class="name">{d.title}</span><br />
-      <span class="theme">{editionTheme(edition, lang)}</span>
+      {editionTheme(edition, lang) && <><span class="theme">{editionTheme(edition, lang)}</span><br /></>}
+      <span class="lang-note">{UI[lang].inLanguage} {editionLanguage(edition, lang).toLowerCase()}</span>
     </span>
     <span class={`badge badge-${d.status}`}>{UI[lang].status[d.status]}</span>
   </a>
