@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+import { lp, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'For companies',
+    description: 'We bring the peer workshop format to your organization: from the internal call to the follow-up of action plans.',
+    eyebrow: 'For companies',
+    h1: 'A peer workshop for your organization',
+    lead: 'In a large organization, teams solve similar problems without knowing what the team next door already learned. An internal peer workshop puts those people in the same room to discuss real experiences with a depth that does not fit in a meeting or a talk.',
+    cta: 'I want this in my company',
+    seeProcess: 'See the process',
+    whyTitle: 'What it is for',
+    why: [
+      ['Connect teams', 'People from different areas, countries or business units discover they share problems, and leave with contacts to solve them.'],
+      ['Surface knowledge', 'What today lives in the heads of a few people ends up in a report the organization can use.'],
+      ['Grow internal leaders', 'Preparing and defending an experience report in front of peers is a huge growth opportunity for the presenter.'],
+      ['Spot risks and opportunities', 'In a space of trust, the problems that never reach formal reports come to the surface.'],
+      ['Move from talk to action', 'The workshop ends with concrete action plans, and we follow up on them.'],
+      ['Build a practice', 'Your teams learn the format, including K-Card facilitation, so they can run it on their own.'],
+    ],
+    processTitle: 'End to end',
+    processText: 'We take care of the whole cycle, with a point person from your organization as our counterpart.',
+    phases: [
+      ['Design', 'Together with your team we define the theme, the goals and who should be in the room: which areas, which roles, which questions you want answered.'],
+      ['Call', 'We create and promote the internal call, with the application form and a guide for writing a good experience report.'],
+      ['Selection', 'We review the proposals and build a group of up to 20 people that mixes teams, seniority levels and perspectives.'],
+      ['Mentoring', 'We coach the people most likely to present so their experience comes across clearly and concretely, without sensitive information.'],
+      ['Facilitation', 'We run the workshop using the LAWST/WOPR format and K-Cards: a Content Owner who sequences the reports and a facilitator who makes sure every voice is heard.'],
+      ['Harvest report', 'After the workshop we deliver a report with the topics that came up, patterns across teams, common problems and the ideas worth scaling.'],
+      ['Follow-up', 'We turn the learnings into action plans with owners, and follow up so that what was discussed in the room actually gets applied.'],
+    ],
+    topicsTitle: 'Possible themes',
+    topicsText: 'Any topic where your teams have accumulated experience. Some we have worked on or are often asked about:',
+    topics: ['Performance and reliability', 'Observability', 'Testing AI-based systems', 'Agentic SDLC', 'Test management', 'Test automation', 'Migrations and modernization', 'Production incidents'],
+    faqTitle: 'Frequently asked questions',
+    faq: [
+      ['How long does it take?', 'The classic format is three days, but inside an organization it also works in two days or in separate sessions. We define this during the design stage.'],
+      ['Can it be remote?', 'We recommend in person: the conversation and the relationships built in the room are a big part of the value. We can evaluate hybrid formats.'],
+      ['What about confidential information?', 'Everything stays inside the organization. At the start we make an explicit agreement about what can be shared, and the harvest report goes only to the people you decide.'],
+      ['Which languages?', 'We run workshops in English, Spanish and Portuguese, and can work with teams across several countries.'],
+    ],
+    finalTitle: "Let's design one for your teams",
+    finalText: 'Tell us the theme, how many teams you want to involve and the dates you have in mind.',
+  },
+  es: {
+    title: 'Para empresas',
+    description: 'Llevamos el formato de peer workshop a tu organización: de la convocatoria interna al seguimiento de los planes de acción.',
+    eyebrow: 'Para empresas',
+    h1: 'Un peer workshop para tu organización',
+    lead: 'En una organización grande, los equipos resuelven problemas parecidos sin enterarse de lo que aprendió el de al lado. Un peer workshop interno pone a esas personas en la misma sala, a discutir experiencias reales con la profundidad que no entra en una reunión ni en una charla.',
+    cta: 'Lo quiero en mi empresa',
+    seeProcess: 'Ver el proceso',
+    whyTitle: 'Para qué sirve',
+    why: [
+      ['Conectar equipos', 'Las personas de distintas áreas, países o unidades de negocio descubren que comparten problemas y se llevan contactos para resolverlos.'],
+      ['Hacer visible el conocimiento', 'Lo que hoy vive en la cabeza de unas pocas personas queda en un reporte que la organización puede usar.'],
+      ['Desarrollar referentes', 'Preparar y defender un reporte de experiencia frente a pares es una instancia de crecimiento enorme para quien presenta.'],
+      ['Detectar riesgos y oportunidades', 'En un espacio de confianza aparecen los problemas que no llegan a los reportes formales.'],
+      ['Pasar de la charla a la acción', 'El taller termina en planes de acción concretos, con seguimiento.'],
+      ['Instalar una práctica', 'Tus equipos aprenden el formato (incluida la moderación con K-Cards) para repetirlo por su cuenta.'],
+    ],
+    processTitle: 'De punta a punta',
+    processText: 'Nos encargamos de todo el ciclo, con un referente de tu organización como contraparte.',
+    phases: [
+      ['Diseño', 'Definimos con tu equipo la temática, los objetivos y quiénes deberían estar en la sala: qué áreas, qué roles, qué preguntas querés que se respondan.'],
+      ['Convocatoria', 'Armamos y difundimos la convocatoria interna, con el formulario y la guía para escribir un buen reporte de experiencia.'],
+      ['Selección', 'Evaluamos las propuestas y armamos un grupo de hasta 20 personas que mezcle equipos, niveles y perspectivas.'],
+      ['Mentoring', 'Acompañamos a quienes tienen más chances de presentar para que su experiencia llegue clara, concreta y sin información sensible.'],
+      ['Moderación', 'Facilitamos el taller con el formato LAWST/WOPR y K-Cards: un Content Owner que ordena los reportes y una moderación que hace que todas las voces entren.'],
+      ['Reporte de cosecha', 'Después del taller entregamos un informe con los temas que surgieron, los patrones entre equipos, los problemas comunes y las ideas que valen la pena escalar.'],
+      ['Follow-up', 'Convertimos los aprendizajes en planes de acción con responsables, y hacemos seguimiento para que lo que se habló en la sala se aplique.'],
+    ],
+    topicsTitle: 'Temáticas posibles',
+    topicsText: 'Cualquier tema donde haya experiencia acumulada en tus equipos. Algunos que ya trabajamos o que nos piden:',
+    topics: ['Performance y confiabilidad', 'Observabilidad', 'Pruebas de sistemas con IA', 'Agentic SDLC', 'Gestión de pruebas', 'Automatización', 'Migraciones y modernización', 'Incidentes en producción'],
+    faqTitle: 'Preguntas frecuentes',
+    faq: [
+      ['¿Cuánto dura?', 'El formato clásico es de tres días, pero en una organización también funciona en dos días o en jornadas separadas. Lo definimos en la etapa de diseño.'],
+      ['¿Puede ser virtual?', 'Recomendamos que sea presencial: la conversación y los vínculos que se generan en la sala son buena parte del valor. Podemos evaluar formatos híbridos.'],
+      ['¿Qué pasa con la información confidencial?', 'Todo queda dentro de la organización. Al inicio hacemos un acuerdo explícito sobre qué se puede compartir, y el reporte de cosecha se entrega solo a quien vos definas.'],
+      ['¿En qué idiomas?', 'Hacemos los talleres en español, inglés y portugués, y podemos trabajar con equipos de varios países.'],
+    ],
+    finalTitle: 'Armemos uno para tus equipos',
+    finalText: 'Contanos la temática, cuántos equipos querés involucrar y en qué fechas estás pensando.',
+  },
+  pt: {
+    title: 'Para empresas',
+    description: 'Levamos o formato de peer workshop para a sua organização: da chamada interna ao acompanhamento dos planos de ação.',
+    eyebrow: 'Para empresas',
+    h1: 'Um peer workshop para a sua organização',
+    lead: 'Em uma organização grande, os times resolvem problemas parecidos sem saber o que o time ao lado já aprendeu. Um peer workshop interno coloca essas pessoas na mesma sala para discutir experiências reais com uma profundidade que não cabe em uma reunião ou em uma palestra.',
+    cta: 'Quero na minha empresa',
+    seeProcess: 'Ver o processo',
+    whyTitle: 'Para que serve',
+    why: [
+      ['Conectar times', 'Pessoas de diferentes áreas, países ou unidades de negócio descobrem que compartilham problemas e saem com contatos para resolvê-los.'],
+      ['Tornar o conhecimento visível', 'O que hoje está na cabeça de poucas pessoas vira um relatório que a organização pode usar.'],
+      ['Desenvolver referências', 'Preparar e defender um relato de experiência diante de pares é uma oportunidade enorme de crescimento para quem apresenta.'],
+      ['Identificar riscos e oportunidades', 'Em um espaço de confiança aparecem os problemas que não chegam aos relatórios formais.'],
+      ['Passar da conversa à ação', 'O workshop termina com planos de ação concretos, com acompanhamento.'],
+      ['Criar uma prática', 'Os seus times aprendem o formato (incluindo a facilitação com K-Cards) para repeti-lo por conta própria.'],
+    ],
+    processTitle: 'De ponta a ponta',
+    processText: 'Cuidamos de todo o ciclo, com uma pessoa de referência da sua organização como contraparte.',
+    phases: [
+      ['Desenho', 'Definimos com o seu time o tema, os objetivos e quem deveria estar na sala: quais áreas, quais papéis, quais perguntas você quer responder.'],
+      ['Chamada', 'Criamos e divulgamos a chamada interna, com o formulário e o guia para escrever um bom relato de experiência.'],
+      ['Seleção', 'Avaliamos as propostas e montamos um grupo de até 20 pessoas que misture times, níveis e perspectivas.'],
+      ['Mentoria', 'Acompanhamos quem tem mais chances de apresentar para que a experiência chegue clara, concreta e sem informações sensíveis.'],
+      ['Facilitação', 'Conduzimos o workshop com o formato LAWST/WOPR e K-Cards: um Content Owner que ordena os relatos e uma facilitação que garante que todas as vozes sejam ouvidas.'],
+      ['Relatório de colheita', 'Depois do workshop entregamos um relatório com os temas que surgiram, os padrões entre times, os problemas comuns e as ideias que vale a pena escalar.'],
+      ['Acompanhamento', 'Transformamos os aprendizados em planos de ação com responsáveis e fazemos o acompanhamento para que o que foi discutido na sala seja aplicado.'],
+    ],
+    topicsTitle: 'Temas possíveis',
+    topicsText: 'Qualquer tema em que os seus times tenham experiência acumulada. Alguns com os quais já trabalhamos ou que nos pedem:',
+    topics: ['Performance e confiabilidade', 'Observabilidade', 'Testes de sistemas com IA', 'Agentic SDLC', 'Gestão de testes', 'Automação de testes', 'Migrações e modernização', 'Incidentes em produção'],
+    faqTitle: 'Perguntas frequentes',
+    faq: [
+      ['Quanto tempo dura?', 'O formato clássico é de três dias, mas em uma organização também funciona em dois dias ou em encontros separados. Definimos isso na etapa de desenho.'],
+      ['Pode ser remoto?', 'Recomendamos que seja presencial: a conversa e os vínculos criados na sala são boa parte do valor. Podemos avaliar formatos híbridos.'],
+      ['E as informações confidenciais?', 'Tudo fica dentro da organização. No início fazemos um acordo explícito sobre o que pode ser compartilhado, e o relatório de colheita é entregue apenas a quem você definir.'],
+      ['Em quais idiomas?', 'Fazemos os workshops em português, espanhol e inglês, e podemos trabalhar com times de vários países.'],
+    ],
+    finalTitle: 'Vamos montar um para os seus times',
+    finalText: 'Conte o tema, quantos times você quer envolver e as datas que tem em mente.',
+  },
+};
+const t = T[lang];
+---
+<Base lang={lang} path="/in-company" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.eyebrow}</p>
+    <h1>{t.h1}</h1>
+    <p>{t.lead}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={lp(lang, '/contact?reason=in-company')}>{t.cta}</a>
+      <a class="btn btn-ghost" href="#process">{t.seeProcess}</a>
+    </div>
+  </header>
+
+  <section class="section wrap">
+    <h2>{t.whyTitle}</h2>
+    <div class="grid grid-3">
+      {t.why.map(([h, p]) => (
+        <div class="card">
+          <h3>{h}</h3>
+          <p class="muted">{p}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" id="process">
+    <h2>{t.processTitle}</h2>
+    <p class="muted prose">{t.processText}</p>
+    <ol class="phases">
+      {t.phases.map(([h, p]) => (
+        <li>
+          <h3>{h}</h3>
+          <p class="muted">{p}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section wrap">
+    <h2>{t.topicsTitle}</h2>
+    <p class="muted prose">{t.topicsText}</p>
+    <ul class="chips">
+      {t.topics.map((topic) => <li>{topic}</li>)}
+    </ul>
+  </section>
+
+  <section class="section wrap">
+    <h2>{t.faqTitle}</h2>
+    <div class="prose">
+      {t.faq.map(([q, a]) => (
+        <>
+          <h3>{q}</h3>
+          <p>{a}</p>
+        </>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="callout">
+      <div>
+        <h3>{t.finalTitle}</h3>
+        <p>{t.finalText}</p>
+      </div>
+      <a class="btn btn-primary" href={lp(lang, '/contact?reason=in-company')}>{t.cta}</a>
+    </div>
+  </section>
+</Base>

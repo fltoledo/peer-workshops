@@ -1,0 +1,13 @@
+series: wopr-latam
+title: "WOPR Latam #03"
+number: 3
+date: 2025-04-01
+city: Lima
+country: PE
+host: Abstracta + Testing Day Perú
+organizers: [Federico Toledo, Andrei Guchín]
+status: past
+theme:
+  en: Performance testing failures
+  es: Fracasos de pruebas de performance
+  pt: Fracassos em testes de performance

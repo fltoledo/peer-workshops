@@ -1,0 +1,13 @@
+series: wopr-latam
+title: "WOPR Latam #04"
+number: 4
+date: 2025-11-01
+city: Montevideo
+country: UY
+host: Abstracta Uruguay
+organizers: [Federico Toledo, Andrei Guchín]
+status: past
+theme:
+  en: Observability
+  es: Observabilidad
+  pt: Observabilidade

@@ -1,0 +1,91 @@
+---
+import { NEWSLETTER } from '../config';
+import { type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'Hear about new editions',
+    text: 'One email when a call opens. Unsubscribe anytime from any email.',
+    label: 'Your email',
+    button: 'Subscribe',
+    sending: 'Subscribing…',
+    ok: 'Done! If you get a confirmation email, open it to complete your subscription.',
+    error: 'We could not subscribe you. Please try again in a few minutes.',
+    fallback: 'Subscribe to updates',
+  },
+  es: {
+    title: 'Enterate de las nuevas ediciones',
+    text: 'Un mail cuando se abre una convocatoria. Te das de baja cuando quieras desde cualquier mail.',
+    label: 'Tu email',
+    button: 'Suscribirme',
+    sending: 'Suscribiendo…',
+    ok: '¡Listo! Si te llega un mail de confirmación, abrilo para completar la suscripción.',
+    error: 'No pudimos suscribirte. Probá de nuevo en unos minutos.',
+    fallback: 'Suscribite a las novedades',
+  },
+  pt: {
+    title: 'Saiba das novas edições',
+    text: 'Um e-mail quando abrir uma chamada. Cancele quando quiser, a partir de qualquer e-mail.',
+    label: 'Seu e-mail',
+    button: 'Inscrever-me',
+    sending: 'Inscrevendo…',
+    ok: 'Pronto! Se você receber um e-mail de confirmação, abra-o para concluir a inscrição.',
+    error: 'Não foi possível fazer a inscrição. Tente novamente em alguns minutos.',
+    fallback: 'Receba as novidades',
+  },
+};
+const t = T[lang];
+const action = NEWSLETTER.formActions[lang];
+---
+<section class="newsletter" id="newsletter" aria-labelledby="newsletter-title" tabindex="-1">
+  <div>
+    <h2 class="h3" id="newsletter-title">{t.title}</h2>
+    <p class="muted">{t.text}</p>
+  </div>
+  {action ? (
+    <form class="newsletter-form" action={action} method="post" data-sending={t.sending} data-ok={t.ok} data-error={t.error}>
+      <label for="newsletter-email" class="sr-only">{t.label}</label>
+      <input id="newsletter-email" type="email" name="email_address" required autocomplete="email" placeholder={t.label} />
+      <button class="btn btn-primary" type="submit">{t.button}</button>
+      <p class="form-status" role="status"></p>
+    </form>
+  ) : (
+    <a class="btn btn-primary" href={NEWSLETTER.fallbackUrl} target="_blank" rel="noopener">{t.fallback}</a>
+  )}
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.newsletter-form');
+  if (form) {
+    const status = form.querySelector('.form-status')!;
+    const msg = form.dataset;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.className = 'form-status';
+      status.textContent = msg.sending!;
+      let res: Response;
+      try {
+        res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      } catch {
+        // Si el navegador bloquea la llamada, enviamos el formulario de forma normal.
+        form.submit();
+        return;
+      }
+      // Kit responde 200 también cuando falla: el resultado real viene en `status` ("success" o "failed").
+      const json = await res.json().catch(() => null);
+      if (res.ok && json?.status === 'success') {
+        form.reset();
+        status.className = 'form-status ok';
+        status.textContent = msg.ok!;
+      } else {
+        status.className = 'form-status error';
+        status.textContent = msg.error!;
+      }
+    });
+  }
+</script>

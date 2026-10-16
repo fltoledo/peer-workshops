@@ -1,0 +1,20 @@
+name: TAPIA
+acronym: TAPIA
+order: 2
+color: "#08765a"
+colorDark: "#3cc79c"
+fullName:
+  en: Taller de Pruebas a IA (AI Testing Workshop)
+  es: Taller de Pruebas a IA
+  pt: Taller de Pruebas a IA (Workshop de Testes de IA)
+summary:
+  en: "How we test systems that include artificial intelligence: LLMs, agents, evaluations and everything that comes with them."
+  es: "Cómo probamos sistemas que incluyen inteligencia artificial: LLMs, agentes, evaluaciones y todo lo que eso trae."
+  pt: "Como testamos sistemas que incluem inteligência artificial: LLMs, agentes, avaliações e tudo o que vem junto."
+about:
+  en:
+    - "TAPIA takes the WOPR format and applies it to a new topic: testing AI-based systems. How to evaluate non-deterministic outputs, what quality means for an agent, and what worked and what didn't in real projects."
+  es:
+    - "TAPIA toma el formato del WOPR y lo aplica a un tema nuevo: las pruebas de sistemas basados en inteligencia artificial. Cómo evaluar salidas no deterministas, qué significa calidad en un agente, qué funcionó y qué no en proyectos reales."
+  pt:
+    - "O TAPIA leva o formato do WOPR para um tema novo: testes de sistemas baseados em inteligência artificial. Como avaliar saídas não determinísticas, o que significa qualidade em um agente, o que funcionou e o que não funcionou em projetos reais."

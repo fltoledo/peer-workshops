@@ -1,0 +1,38 @@
+---
+// Raíz del sitio: redirige al idioma guardado o al del navegador. Sin JavaScript, muestra los tres enlaces.
+import '../styles/global.css';
+import { SITE } from '../config';
+import { DEFAULT_LANG, LANGS, LANG_META, lp, url } from '../i18n';
+
+const targets = Object.fromEntries(LANGS.map((l) => [l, lp(l)]));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{SITE.name}</title>
+    <meta name="description" content="Peer workshops for software professionals · Talleres entre pares · Workshops entre pares" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    {LANGS.map((l) => <link rel="alternate" hreflang={LANG_META[l].htmlLang} href={lp(l)} />)}
+    <script is:inline define:vars={{ targets, langs: LANGS, fallback: DEFAULT_LANG }}>
+      let lang;
+      try {
+        lang = localStorage.getItem('lang');
+      } catch {}
+      if (!langs.includes(lang)) {
+        const prefs = navigator.languages || [navigator.language || ''];
+        lang = prefs.map((p) => p.slice(0, 2).toLowerCase()).find((p) => langs.includes(p)) || fallback;
+      }
+      location.replace(targets[lang]);
+    </script>
+  </head>
+  <body>
+    <main class="wrap" style="padding-top: 80px">
+      <h1>{SITE.name}</h1>
+      <ul>
+        {LANGS.map((l) => <li><a href={lp(l)} lang={LANG_META[l].htmlLang} hreflang={LANG_META[l].htmlLang}>{LANG_META[l].label}</a></li>)}
+      </ul>
+    </main>
+  </body>
+</html>

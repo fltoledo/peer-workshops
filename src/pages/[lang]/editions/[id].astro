@@ -1,0 +1,13 @@
+---
+import View from '../../../views/EditionDetail.astro';
+import { LANGS, type Lang } from '../../../i18n';
+import { getEditions, type Edition } from '../../../lib';
+
+export async function getStaticPaths() {
+  const editions = await getEditions();
+  return LANGS.flatMap((lang) => editions.map((edition) => ({ params: { lang, id: edition.id }, props: { edition } })));
+}
+const lang = Astro.params.lang as Lang;
+const { edition } = Astro.props as { edition: Edition };
+---
+<View lang={lang} edition={edition} />

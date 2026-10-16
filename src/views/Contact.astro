@@ -1,0 +1,212 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'Contact',
+    description: 'Get in touch to bring a peer workshop to your company, host an edition or propose a new theme.',
+    h1: 'Get in touch',
+    lead: 'Want a peer workshop for your company, to host an edition, to propose a new theme, or have a question? We will reply by email.',
+    required: 'Fields marked with * are required.',
+    name: 'Name', email: 'Email', reason: 'Reason', company: 'Company', role: 'Your role',
+    scope: 'How many people or teams do you have in mind?',
+    scopes: ['Not sure yet', 'One area or large team', 'Several teams in one country', 'Teams across several countries'],
+    reasons: { 'in-company': 'I want a peer workshop in my company', general: 'General question', participate: 'I want to participate', host: 'My organization could host', theme: 'I want to propose a theme or organize an edition', other: 'Other' },
+    message: 'Message',
+    companyPlaceholder: 'Tell us the theme you are interested in, what you want to achieve and the dates you have in mind.',
+    send: 'Send',
+    sending: 'Sending…',
+    ok: 'Thank you! We got your message and will reply soon.',
+    error: 'We could not send your message. Please try again in a few minutes.',
+    notConfigured: 'The form is not set up yet (the Web3Forms key is missing).',
+    otherTitle: 'Other ways',
+    news: 'Updates:', newsLink: 'subscribe', newsTail: 'to hear when a call opens.',
+    applyNote: 'To apply to an edition, use the call’s form, which appears on the edition page while the call is open.',
+    subject: 'New message from',
+  },
+  es: {
+    title: 'Contacto',
+    description: 'Escribinos para llevar un peer workshop a tu empresa, ser host o proponer una nueva temática.',
+    h1: 'Escribinos',
+    lead: '¿Querés un peer workshop para tu empresa, ser host, proponer una temática nueva o tenés una duda? Te respondemos por mail.',
+    required: 'Los campos marcados con * son obligatorios.',
+    name: 'Nombre', email: 'Email', reason: 'Motivo', company: 'Empresa', role: 'Tu rol',
+    scope: '¿Cuántas personas o equipos te imaginás involucrando?',
+    scopes: ['Todavía no lo sé', 'Un área o equipo grande', 'Varios equipos de un mismo país', 'Equipos de varios países'],
+    reasons: { 'in-company': 'Quiero un peer workshop en mi empresa', general: 'Consulta general', participate: 'Quiero participar', host: 'Mi organización podría ser host', theme: 'Propongo una temática u organizar una edición', other: 'Otro' },
+    message: 'Mensaje',
+    companyPlaceholder: 'Contanos la temática que te interesa, qué querés lograr y en qué fechas estás pensando.',
+    send: 'Enviar',
+    sending: 'Enviando…',
+    ok: '¡Gracias! Recibimos tu mensaje y te vamos a responder pronto.',
+    error: 'No pudimos enviar el mensaje. Probá de nuevo en unos minutos.',
+    notConfigured: 'El formulario todavía no está configurado (falta la clave de Web3Forms).',
+    otherTitle: 'Otras formas',
+    news: 'Novedades:', newsLink: 'suscribite', newsTail: 'para enterarte cuando se abra una convocatoria.',
+    applyNote: 'Para postularte a una edición usá el formulario de la convocatoria, que aparece en la página de la edición cuando está abierta.',
+    subject: 'Nuevo mensaje desde',
+  },
+  pt: {
+    title: 'Contato',
+    description: 'Fale com a gente para levar um peer workshop à sua empresa, sediar uma edição ou propor um novo tema.',
+    h1: 'Fale com a gente',
+    lead: 'Quer um peer workshop para a sua empresa, sediar uma edição, propor um tema novo ou tem alguma dúvida? Respondemos por e-mail.',
+    required: 'Os campos marcados com * são obrigatórios.',
+    name: 'Nome', email: 'E-mail', reason: 'Motivo', company: 'Empresa', role: 'Seu cargo',
+    scope: 'Quantas pessoas ou times você imagina envolver?',
+    scopes: ['Ainda não sei', 'Uma área ou um time grande', 'Vários times de um mesmo país', 'Times de vários países'],
+    reasons: { 'in-company': 'Quero um peer workshop na minha empresa', general: 'Dúvida geral', participate: 'Quero participar', host: 'Minha organização poderia ser host', theme: 'Quero propor um tema ou organizar uma edição', other: 'Outro' },
+    message: 'Mensagem',
+    companyPlaceholder: 'Conte o tema de interesse, o que você quer alcançar e as datas que tem em mente.',
+    send: 'Enviar',
+    sending: 'Enviando…',
+    ok: 'Obrigado! Recebemos a sua mensagem e responderemos em breve.',
+    error: 'Não foi possível enviar a mensagem. Tente novamente em alguns minutos.',
+    notConfigured: 'O formulário ainda não está configurado (falta a chave do Web3Forms).',
+    otherTitle: 'Outras formas',
+    news: 'Novidades:', newsLink: 'inscreva-se', newsTail: 'para saber quando abrir uma chamada.',
+    applyNote: 'Para se inscrever em uma edição, use o formulário da chamada, que aparece na página da edição enquanto ela estiver aberta.',
+    subject: 'Nova mensagem de',
+  },
+};
+const t = T[lang];
+const req = '<span class="req" aria-hidden="true">*</span>';
+---
+<Base lang={lang} path="/contact" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.title}</p>
+    <h1>{t.h1}</h1>
+    <p>{t.lead}</p>
+  </header>
+
+  <div class="wrap">
+    <div class="grid grid-2" style="align-items: start">
+      <form
+        class="form card"
+        id="contact-form"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        aria-describedby="form-hint"
+        data-key={SITE.web3formsKey}
+        data-sending={t.sending}
+        data-ok={t.ok}
+        data-error={t.error}
+        data-not-configured={t.notConfigured}
+        data-company-placeholder={t.companyPlaceholder}
+      >
+        <p id="form-hint" class="muted" style="margin: 0" set:html={t.required.replace('*', req)} />
+        <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+        <input type="hidden" name="subject" value={`${t.subject} ${SITE.name}`} />
+        <input type="hidden" name="language" value={lang} />
+        <input type="hidden" name="from_name" value={SITE.name} />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="field">
+          <label for="name">{t.name} <Fragment set:html={req} /></label>
+          <input id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">{t.email} <Fragment set:html={req} /></label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="reason">{t.reason}</label>
+          <select id="reason" name="reason">
+            {Object.entries(t.reasons).map(([value, label]) => (
+              <option value={value} selected={value === 'general'}>{label}</option>
+            ))}
+          </select>
+        </div>
+        <div class="company-fields" id="company-fields" hidden>
+          <div class="field">
+            <label for="company">{t.company} <Fragment set:html={req} /></label>
+            <input id="company" name="company" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="role">{t.role}</label>
+            <input id="role" name="role" autocomplete="organization-title" />
+          </div>
+          <div class="field">
+            <label for="scope">{t.scope}</label>
+            <select id="scope" name="scope">
+              {t.scopes.map((s, i) => <option value={i === 0 ? '' : s}>{s}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">{t.message} <Fragment set:html={req} /></label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" style="justify-self: start">{t.send}</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+
+      <div class="card">
+        <h2 class="h3">{t.otherTitle}</h2>
+        <p>
+          <strong>{t.news}</strong>{' '}
+          <a href="#newsletter">{t.newsLink}</a> {t.newsTail}
+        </p>
+        {SITE.contactEmail && (
+          <p><strong>{t.email}:</strong> <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+        )}
+        <p class="muted">{t.applyNote}</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const msg = form.dataset;
+    const status = document.getElementById('form-status')!;
+    const select = document.getElementById('reason') as HTMLSelectElement;
+    const companyFields = document.getElementById('company-fields')!;
+    const company = document.getElementById('company') as HTMLInputElement;
+    const message = document.getElementById('message') as HTMLTextAreaElement;
+
+    const syncReason = () => {
+      const isCompany = select.value === 'in-company';
+      companyFields.hidden = !isCompany;
+      company.required = isCompany;
+      message.placeholder = isCompany ? msg.companyPlaceholder! : '';
+    };
+
+    const reason = new URLSearchParams(location.search).get('reason');
+    if (reason && [...select.options].some((o) => o.value === reason)) select.value = reason;
+    select.addEventListener('change', syncReason);
+    syncReason();
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!msg.key) {
+        status.className = 'form-status error';
+        status.textContent = msg.notConfigured!;
+        return;
+      }
+      status.className = 'form-status';
+      status.textContent = msg.sending!;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message);
+        form.reset();
+        syncReason();
+        status.className = 'form-status ok';
+        status.textContent = msg.ok!;
+      } catch {
+        status.className = 'form-status error';
+        status.textContent = msg.error!;
+      }
+    });
+  </script>
+</Base>

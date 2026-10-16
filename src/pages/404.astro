@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config';
+import { lp, url } from '../i18n';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 · {SITE.name}</title>
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="wrap" style="padding-top: 80px">
+      <h1>404</h1>
+      <p>This page does not exist. <a href={lp('en')}>Go to the home page</a>.</p>
+      <p lang="es">Esta página no existe. <a href={lp('es')}>Ir al inicio</a>.</p>
+      <p lang="pt-BR">Esta página não existe. <a href={lp('pt')}>Ir para o início</a>.</p>
+    </main>
+  </body>
+</html>

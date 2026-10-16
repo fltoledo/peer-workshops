@@ -1,0 +1,197 @@
+---
+import Base from '../layouts/Base.astro';
+import { lp, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'The format',
+    description: 'How a peer workshop works: experience reports, K-Card facilitation and the three-day agenda.',
+    h1: 'A workshop among peers',
+    lead: 'Every edition follows the format of LAWST (Los Altos Workshop on Software Testing), the same one WOPR has used since 2003. It has been refined over more than twenty years so that a group of practitioners can truly learn from each other’s experiences.',
+    essentialsTitle: 'The essentials',
+    essentials: [
+      '<strong>Small group:</strong> up to 20 participants. We tried 25 and it was harder to keep the conversations in order.',
+      '<strong>Experience reports:</strong> to take part you propose a first-hand experience related to the theme of the edition.',
+      '<strong>Short presentations, long discussions:</strong> each report takes at most 30 minutes; questions have no time limit. That is why nobody knows in advance who will get to present.',
+      '<strong>Full commitment:</strong> three days, 9 am to 6 pm, in person in the city of the edition.',
+      '<strong>Free:</strong> the workshop has no cost. It does not cover travel or lodging, but coffee, drinks and snacks are provided during breaks.',
+      '<strong>Diversity:</strong> when selecting, we look for the best proposals and also for the most diverse group possible.',
+    ],
+    trustTitle: 'A space of trust',
+    trust: 'We aim for an environment of trust, respect and safety. What is shared is meant to enrich the group and the community, but we are very careful with confidential information: at the start of the workshop we make an explicit agreement about what can leave the room. Occasionally we take a photo to share the experience on social media or in an article.',
+    kTitle: 'K-Card facilitation',
+    kText: 'Facilitation has two roles. The <strong>Content Owner</strong> decides which report is presented at each moment and gives each person advance notice. The <strong>facilitator</strong> keeps the conversation in order using K-Cards: colored cards that participants raise to ask for the floor.',
+    cards: [
+      ['k-green', 'Green', 'New thread: a new question or topic.'],
+      ['k-yellow', 'Yellow', 'I want to continue the current thread.'],
+      ['k-red', 'Red', 'Urgent: I cannot go on without saying this.'],
+      ['k-purple', 'Purple', '<em>Rat hole</em>: we went off on a tangent, let’s get back.'],
+    ],
+    kMore: 'The dynamic is explained at the workshop, but it helps to arrive with an idea of how it works. Leandro Melendez (Señor Performo) explains it in a video of less than 4 minutes, based on WOPR 2022 in Uruguay.',
+    agendaTitle: 'Typical agenda',
+    agendaNote: 'This is a reference and is adjusted for each edition.',
+    day0Title: 'Day 0 · 7 pm',
+    day0: 'Dinner at a local restaurant. Most people arrive the day before, and it is a good way to start getting to know each other.',
+    daysTitle: 'Days 1, 2 and 3',
+    agenda: [
+      ['8:30', 'Breakfast and networking'],
+      ['9:00', 'Start. Day 1: welcome, participation agreement and introduction to the theme. Days 2 and 3: check-in.'],
+      ['10:30', 'Coffee break'],
+      ['12:30', 'Lunch'],
+      ['15:30', 'Coffee break in the room'],
+      ['17:30', 'Check-out and close of the day'],
+    ],
+    agendaTime: 'Time',
+    agendaActivity: 'Activity',
+    closing: 'At the start of each day and after lunch we run short energizers (games, speed dating) to keep the energy up and get to know each other better. On day 3, after lunch, the active report is wrapped up and those who did not get to present give a kind of elevator pitch. We close with a round of thanks and a toast.',
+    ctaTitle: 'Interested in taking part?',
+    ctaText: 'See how to apply and how to put together a good experience report.',
+    cta: 'How to participate',
+  },
+  es: {
+    title: 'El formato',
+    description: 'Cómo funciona un peer workshop: reportes de experiencia, moderación con K-Cards y la agenda de los tres días.',
+    h1: 'Un taller entre pares',
+    lead: 'Todas las ediciones siguen el formato de LAWST (Los Altos Workshop on Software Testing), el mismo que usa el WOPR desde 2003. Se fue afinando durante más de veinte años para que un grupo de especialistas aprenda de verdad de las experiencias de los demás.',
+    essentialsTitle: 'Lo esencial',
+    essentials: [
+      '<strong>Grupo chico:</strong> hasta 20 participantes. Probamos con 25 y costó más mantener el orden de las conversaciones.',
+      '<strong>Reportes de experiencia:</strong> para participar hay que proponer una experiencia propia relacionada con la temática de la edición.',
+      '<strong>Presentaciones cortas, debates largos:</strong> cada reporte dura como máximo 30 minutos; las preguntas no tienen límite. Por eso no se sabe de antemano quiénes van a llegar a presentar.',
+      '<strong>Dedicación completa:</strong> tres días, de 9 a 18 hs, presencial en la ciudad de la edición.',
+      '<strong>Gratuito:</strong> el taller no tiene costo. No cubre viajes ni estadía; sí café, bebidas y algo para comer en los breaks.',
+      '<strong>Diversidad:</strong> al seleccionar buscamos las mejores propuestas y también el grupo más diverso posible.',
+    ],
+    trustTitle: 'Un espacio de confianza',
+    trust: 'Buscamos un entorno de confianza, respeto y seguridad. Lo que se comparte es para enriquecer al grupo y a la comunidad, pero cuidamos mucho la información confidencial: al empezar el taller hacemos un acuerdo explícito sobre qué puede salir de la sala. Ocasionalmente sacamos alguna foto para compartir la experiencia en redes o en un artículo.',
+    kTitle: 'Moderación con K-Cards',
+    kText: 'Hay dos roles en la facilitación. Quien oficia de <strong>Content Owner</strong> decide qué reporte se presenta en cada momento y avisa con tiempo a cada persona. Quien <strong>modera</strong> ordena la conversación con K-Cards: tarjetas de colores que cada participante levanta para pedir la palabra.',
+    cards: [
+      ['k-green', 'Verde', 'Nuevo hilo: una pregunta o tema nuevo.'],
+      ['k-yellow', 'Amarilla', 'Sigo el hilo actual.'],
+      ['k-red', 'Roja', 'Urgente: no puedo seguir sin decir esto.'],
+      ['k-purple', 'Violeta', '<em>Rat hole</em>: nos fuimos por las ramas, volvamos.'],
+    ],
+    kMore: 'La dinámica se explica en el taller, pero conviene llegar con una idea. Leandro Melendez (el Señor Performo) la explica en un video de menos de 4 minutos, basado en el WOPR 2022 en Uruguay.',
+    agendaTitle: 'Agenda típica',
+    agendaNote: 'Es una referencia y se ajusta en cada edición.',
+    day0Title: 'Día 0 · 19:00',
+    day0: 'Cena previa en algún restaurante local. La mayoría llega el día antes y sirve para irse conociendo.',
+    daysTitle: 'Días 1, 2 y 3',
+    agenda: [
+      ['8:30', 'Desayuno y networking'],
+      ['9:00', 'Comienzo. Día 1: bienvenida, acuerdo de participación y presentación del tema. Días 2 y 3: check-in.'],
+      ['10:30', 'Coffee break'],
+      ['12:30', 'Almuerzo'],
+      ['15:30', 'Coffee break en la sala'],
+      ['17:30', 'Check-out y cierre del día'],
+    ],
+    agendaTime: 'Hora',
+    agendaActivity: 'Actividad',
+    closing: 'Al empezar cada jornada y al volver del almuerzo hacemos dinámicas de activación (juegos, speed dating) para reactivar la energía y conocernos mejor. El día 3, después del almuerzo, se cierra el reporte activo y quienes no llegaron a presentar hacen una especie de elevator pitch. Terminamos con una ronda de agradecimientos y un brindis.',
+    ctaTitle: '¿Te interesa participar?',
+    ctaText: 'Mirá cómo postular y cómo armar un buen reporte de experiencia.',
+    cta: 'Cómo participar',
+  },
+  pt: {
+    title: 'O formato',
+    description: 'Como funciona um peer workshop: relatos de experiência, facilitação com K-Cards e a agenda dos três dias.',
+    h1: 'Um workshop entre pares',
+    lead: 'Todas as edições seguem o formato do LAWST (Los Altos Workshop on Software Testing), o mesmo usado pelo WOPR desde 2003. Ele foi aperfeiçoado ao longo de mais de vinte anos para que um grupo de especialistas aprenda de verdade com as experiências dos outros.',
+    essentialsTitle: 'O essencial',
+    essentials: [
+      '<strong>Grupo pequeno:</strong> até 20 participantes. Testamos com 25 e foi mais difícil manter a ordem das conversas.',
+      '<strong>Relatos de experiência:</strong> para participar, é preciso propor uma experiência própria relacionada ao tema da edição.',
+      '<strong>Apresentações curtas, debates longos:</strong> cada relato dura no máximo 30 minutos; as perguntas não têm limite. Por isso não se sabe de antemão quem vai chegar a apresentar.',
+      '<strong>Dedicação total:</strong> três dias, das 9h às 18h, presencialmente na cidade da edição.',
+      '<strong>Gratuito:</strong> o workshop não tem custo. Não cobre viagens nem hospedagem, mas oferece café, bebidas e lanches nos intervalos.',
+      '<strong>Diversidade:</strong> na seleção buscamos as melhores propostas e também o grupo mais diverso possível.',
+    ],
+    trustTitle: 'Um espaço de confiança',
+    trust: 'Buscamos um ambiente de confiança, respeito e segurança. O que é compartilhado serve para enriquecer o grupo e a comunidade, mas temos muito cuidado com informações confidenciais: no início do workshop fazemos um acordo explícito sobre o que pode sair da sala. Ocasionalmente tiramos alguma foto para compartilhar a experiência nas redes ou em um artigo.',
+    kTitle: 'Facilitação com K-Cards',
+    kText: 'A facilitação tem dois papéis. Quem atua como <strong>Content Owner</strong> decide qual relato é apresentado em cada momento e avisa cada pessoa com antecedência. Quem <strong>facilita</strong> organiza a conversa com K-Cards: cartões coloridos que cada participante levanta para pedir a palavra.',
+    cards: [
+      ['k-green', 'Verde', 'Novo fio: uma pergunta ou tema novo.'],
+      ['k-yellow', 'Amarelo', 'Quero continuar o fio atual.'],
+      ['k-red', 'Vermelho', 'Urgente: não consigo seguir sem dizer isto.'],
+      ['k-purple', 'Roxo', '<em>Rat hole</em>: saímos do assunto, vamos voltar.'],
+    ],
+    kMore: 'A dinâmica é explicada no workshop, mas vale a pena chegar com uma ideia. Leandro Melendez (o Señor Performo) a explica em um vídeo de menos de 4 minutos, baseado no WOPR 2022 no Uruguai.',
+    agendaTitle: 'Agenda típica',
+    agendaNote: 'É uma referência e é ajustada em cada edição.',
+    day0Title: 'Dia 0 · 19h',
+    day0: 'Jantar em algum restaurante local. A maioria chega no dia anterior, e é uma boa forma de começar a se conhecer.',
+    daysTitle: 'Dias 1, 2 e 3',
+    agenda: [
+      ['8:30', 'Café da manhã e networking'],
+      ['9:00', 'Início. Dia 1: boas-vindas, acordo de participação e apresentação do tema. Dias 2 e 3: check-in.'],
+      ['10:30', 'Coffee break'],
+      ['12:30', 'Almoço'],
+      ['15:30', 'Coffee break na sala'],
+      ['17:30', 'Check-out e encerramento do dia'],
+    ],
+    agendaTime: 'Horário',
+    agendaActivity: 'Atividade',
+    closing: 'No início de cada dia e na volta do almoço fazemos dinâmicas de ativação (jogos, speed dating) para renovar a energia e nos conhecermos melhor. No dia 3, depois do almoço, o relato ativo é encerrado e quem não chegou a apresentar faz uma espécie de elevator pitch. Terminamos com uma rodada de agradecimentos e um brinde.',
+    ctaTitle: 'Tem interesse em participar?',
+    ctaText: 'Veja como se inscrever e como montar um bom relato de experiência.',
+    cta: 'Como participar',
+  },
+};
+const t = T[lang];
+---
+<Base lang={lang} path="/format" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.title}</p>
+    <h1>{t.h1}</h1>
+    <p>{t.lead}</p>
+  </header>
+
+  <div class="wrap prose">
+    <h2>{t.essentialsTitle}</h2>
+    <ul>
+      {t.essentials.map((e) => <li set:html={e} />)}
+    </ul>
+
+    <h2>{t.trustTitle}</h2>
+    <p>{t.trust}</p>
+
+    <h2 id="k-cards">{t.kTitle}</h2>
+    <p set:html={t.kText} />
+    <div class="grid grid-2" style="margin-bottom: 1em">
+      {t.cards.map(([cls, name, text]) => (
+        <div class="card"><strong class={cls}>{name}</strong> · <span set:html={text} /></div>
+      ))}
+    </div>
+    <p>{t.kMore}</p>
+
+    <h2>{t.agendaTitle}</h2>
+    <p class="muted">{t.agendaNote}</p>
+    <h3>{t.day0Title}</h3>
+    <p>{t.day0}</p>
+    <h3>{t.daysTitle}</h3>
+    <table class="schedule">
+      <thead class="sr-only">
+        <tr><th scope="col">{t.agendaTime}</th><th scope="col">{t.agendaActivity}</th></tr>
+      </thead>
+      <tbody>
+        {t.agenda.map(([time, what]) => <tr><td>{time}</td><td>{what}</td></tr>)}
+      </tbody>
+    </table>
+    <p style="margin-top: 1em">{t.closing}</p>
+
+    <div class="callout">
+      <div>
+        <h3>{t.ctaTitle}</h3>
+        <p>{t.ctaText}</p>
+      </div>
+      <a class="btn btn-primary" href={lp(lang, '/participate')}>{t.cta}</a>
+    </div>
+  </div>
+</Base>

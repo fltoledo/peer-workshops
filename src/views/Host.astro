@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import { lp, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'Host an edition',
+    description: 'What an organization needs to host a community peer workshop, and what it gets in return.',
+    eyebrow: 'Host',
+    lead: 'Every community edition is possible thanks to a host organization that provides the venue and, ideally, the coffee breaks. WOPR has been hosted by Google, Microsoft, Facebook, Salesforce, eBay, BlazeMeter and many more.',
+    needTitle: 'What is needed',
+    need: [
+      'A room for 25 people with tables and chairs in a U shape.',
+      'A location close to and well connected with lodging options.',
+      'Good light and ventilation: these are three intense days.',
+      'A projector or large screen, and a stand for the presenter’s laptop.',
+      'A whiteboard with markers.',
+      'A place to step outside for fresh air and, if possible, run group activities.',
+      'Cold and hot water (yes, for mate), tea and coffee throughout the day.',
+      'Morning and afternoon coffee breaks.',
+      'Wi-Fi and logistical support if needed.',
+    ],
+    offerTitle: 'What we offer',
+    offer: [
+      'Two seats in the workshop for people from your organization.',
+      'Visibility throughout the promotion of the edition.',
+      'Being part of a community of practitioners.',
+    ],
+    offerNote: 'People joining on behalf of the host need experience in the theme and must present an experience report. Otherwise, they take part as observers.',
+    companyNote: 'Looking for a private workshop just for your teams?',
+    companyLink: 'See our in-company offering',
+    ctaTitle: 'Could your organization host an edition?',
+    ctaText: 'Tell us the city, the theme you are interested in and possible dates.',
+    cta: 'Get in touch',
+  },
+  es: {
+    title: 'Hosteá una edición',
+    description: 'Qué necesita una organización para ser anfitriona de un peer workshop abierto a la comunidad y qué recibe a cambio.',
+    eyebrow: 'Ser host',
+    lead: 'Cada edición abierta a la comunidad es posible gracias a una organización anfitriona que pone el espacio y, en lo posible, los coffee breaks. El WOPR fue hosteado por Google, Microsoft, Facebook, Salesforce, eBay, BlazeMeter y muchas más.',
+    needTitle: 'Qué se necesita',
+    need: [
+      'Una sala para 25 personas con mesas y sillas en U.',
+      'Ubicación cercana y bien conectada con opciones de hospedaje.',
+      'Buena luz y ventilación: son tres días intensos.',
+      'Proyector o monitor grande, y un atril para la laptop de quien presenta.',
+      'Pizarra con marcadores.',
+      'Un lugar para salir a tomar aire y, si se puede, hacer dinámicas grupales.',
+      'Agua fría y caliente (sí, para el mate), té y café durante todo el día.',
+      'Coffee breaks de mañana y de tarde.',
+      'Wi-Fi y apoyo logístico si hace falta.',
+    ],
+    offerTitle: 'Qué ofrecemos',
+    offer: [
+      'Dos lugares en el taller para personas de la organización.',
+      'Visibilidad en toda la difusión de la edición.',
+      'Ser parte de una comunidad de especialistas.',
+    ],
+    offerNote: 'Quienes participen por la organización host necesitan experiencia en la temática y presentar un reporte de experiencia. Si no, participan como observadores.',
+    companyNote: '¿Buscás un taller privado solo para tus equipos?',
+    companyLink: 'Mirá nuestra propuesta para empresas',
+    ctaTitle: '¿Tu organización podría ser host?',
+    ctaText: 'Contanos ciudad, temática que te interesa y fechas posibles.',
+    cta: 'Escribinos',
+  },
+  pt: {
+    title: 'Seja host de uma edição',
+    description: 'O que uma organização precisa para sediar um peer workshop aberto à comunidade e o que recebe em troca.',
+    eyebrow: 'Ser host',
+    lead: 'Cada edição aberta à comunidade é possível graças a uma organização anfitriã que oferece o espaço e, se possível, os coffee breaks. O WOPR já foi sediado por Google, Microsoft, Facebook, Salesforce, eBay, BlazeMeter e muitas outras.',
+    needTitle: 'O que é necessário',
+    need: [
+      'Uma sala para 25 pessoas com mesas e cadeiras em U.',
+      'Localização próxima e bem conectada a opções de hospedagem.',
+      'Boa iluminação e ventilação: são três dias intensos.',
+      'Projetor ou tela grande, e um suporte para o notebook de quem apresenta.',
+      'Quadro branco com marcadores.',
+      'Um lugar para sair e tomar um ar e, se possível, fazer dinâmicas em grupo.',
+      'Água fria e quente (sim, para o chimarrão), chá e café durante todo o dia.',
+      'Coffee breaks de manhã e à tarde.',
+      'Wi-Fi e apoio logístico, se necessário.',
+    ],
+    offerTitle: 'O que oferecemos',
+    offer: [
+      'Duas vagas no workshop para pessoas da organização.',
+      'Visibilidade em toda a divulgação da edição.',
+      'Fazer parte de uma comunidade de especialistas.',
+    ],
+    offerNote: 'Quem participar pela organização host precisa ter experiência no tema e apresentar um relato de experiência. Caso contrário, participa como observador.',
+    companyNote: 'Procura um workshop privado só para os seus times?',
+    companyLink: 'Veja a nossa proposta para empresas',
+    ctaTitle: 'A sua organização poderia ser host?',
+    ctaText: 'Conte a cidade, o tema de interesse e as datas possíveis.',
+    cta: 'Fale com a gente',
+  },
+};
+const t = T[lang];
+---
+<Base lang={lang} path="/host" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.eyebrow}</p>
+    <h1>{t.title}</h1>
+    <p>{t.lead}</p>
+  </header>
+
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h2 class="h3">{t.needTitle}</h2>
+        <ul>
+          {t.need.map((n) => <li>{n}</li>)}
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="h3">{t.offerTitle}</h2>
+        <ul>
+          {t.offer.map((o) => <li>{o}</li>)}
+        </ul>
+        <p class="muted">{t.offerNote}</p>
+        <p>{t.companyNote} <a href={lp(lang, '/in-company')}>{t.companyLink}</a>.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div>
+        <h2 class="h3">{t.ctaTitle}</h2>
+        <p>{t.ctaText}</p>
+      </div>
+      <a class="btn btn-primary" href={lp(lang, '/contact?reason=host')}>{t.cta}</a>
+    </div>
+  </div>
+</Base>

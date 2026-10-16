@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { SITE } from '../config';
+import { LANGS, LANG_META, NAV, UI, lp, url, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Ruta de la página sin idioma, p. ej. '/format'. Se usa para el selector de idioma. */
+  path: string;
+  title?: string;
+  description: string;
+}
+const { lang, path, title, description } = Astro.props;
+const t = UI[lang];
+const pageTitle = title ? `${title} · ${SITE.name}` : SITE.name;
+const isActive = (p: string) => (p === '/' ? path === '/' : path.startsWith(p));
+const site = Astro.site?.origin ?? '';
+---
+<!doctype html>
+<html lang={LANG_META[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    {LANGS.map((l) => <link rel="alternate" hreflang={LANG_META[l].htmlLang} href={`${site}${lp(l, path)}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${site}${lp('en', path)}`} />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">{t.skip}</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href={lp(lang)}>
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28"><circle cx="9" cy="16" r="6" /><circle cx="23" cy="16" r="6" /></svg>
+          </span>
+          {SITE.name}
+        </a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+          <span class="nav-toggle-icon" aria-hidden="true"><span></span></span>
+          <span class="sr-only">{t.menu}</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label={t.menu}>
+          {NAV.map((item) => (
+            <a
+              href={lp(lang, item.path)}
+              class={'cta' in item ? 'nav-cta' : undefined}
+              aria-current={isActive(item.path) ? 'page' : undefined}
+            >{t.nav[item.key]}</a>
+          ))}
+          <ul class="lang-switch" aria-label={t.language}>
+            {LANGS.map((l) => (
+              <li>
+                <a
+                  href={lp(l, path)}
+                  lang={LANG_META[l].htmlLang}
+                  hreflang={LANG_META[l].htmlLang}
+                  aria-current={l === lang ? 'true' : undefined}
+                  data-lang={l}
+                ><span aria-hidden="true">{LANG_META[l].short}</span><span class="sr-only">{LANG_META[l].label}</span></a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="content" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <NewsletterForm lang={lang} />
+      </div>
+      <div class="wrap footer-inner">
+        <div>
+          <strong>{SITE.name}</strong>
+          <p>{t.footerTagline}.</p>
+        </div>
+        <div class="footer-links">
+          <a href={lp(lang, '/in-company')}>{t.nav.company}</a>
+          <a href={lp(lang, '/contact')}>{t.nav.contact}</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle')!;
+      toggle.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+      // Recordar el idioma elegido para la próxima visita a la raíz del sitio.
+      document.querySelectorAll<HTMLAnchorElement>('.lang-switch a').forEach((a) =>
+        a.addEventListener('click', () => {
+          try {
+            localStorage.setItem('lang', a.dataset.lang!);
+          } catch {}
+        }),
+      );
+    </script>
+  </body>
+</html>

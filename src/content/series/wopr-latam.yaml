@@ -1,0 +1,24 @@
+name: WOPR Latam
+acronym: WOPR
+order: 1
+# Color de texto en modo claro y oscuro (ambos con contraste AA ≥ 4.5:1)
+color: "#2f5bea"
+colorDark: "#7d9bff"
+fullName:
+  en: Workshop on Performance and Reliability
+  es: Workshop on Performance and Reliability
+  pt: Workshop on Performance and Reliability
+summary:
+  en: Performance, observability and reliability (SRE). The Latin American edition of WOPR, running since 2003.
+  es: Performance, observabilidad y confiabilidad (SRE). La edición latinoamericana del WOPR, que se realiza desde 2003.
+  pt: Performance, observabilidade e confiabilidade (SRE). A edição latino-americana do WOPR, realizado desde 2003.
+about:
+  en:
+    - "WOPR was first held in 2003 in New York and has made major contributions to the performance testing, observability and SRE community ever since. It has been hosted by companies such as Google, Microsoft, Facebook, Salesforce, eBay and BlazeMeter across the United States, Canada and Europe."
+    - "In 2022 it came to Latin America for the first time, hosted by Abstracta in Montevideo. In 2023 WOPR Latam was born: the first WOPR in history run entirely in Spanish, organized by Federico Toledo and Andrei Guchín with the support of Eric Proegler."
+  es:
+    - "El WOPR se realizó por primera vez en 2003 en Nueva York y desde entonces hizo grandes aportes a la comunidad de testing de performance, observabilidad y SRE. Lo hostearon empresas como Google, Microsoft, Facebook, Salesforce, eBay y BlazeMeter, en Estados Unidos, Canadá y Europa."
+    - "En 2022 se realizó por primera vez en Latinoamérica, con Abstracta como host en Montevideo. En 2023 nació el WOPR Latam, el primer WOPR de la historia hecho completamente en español, organizado por Federico Toledo y Andrei Guchín con el apoyo de Eric Proegler."
+  pt:
+    - "O WOPR foi realizado pela primeira vez em 2003, em Nova York, e desde então trouxe grandes contribuições para a comunidade de testes de performance, observabilidade e SRE. Já foi sediado por empresas como Google, Microsoft, Facebook, Salesforce, eBay e BlazeMeter, nos Estados Unidos, no Canadá e na Europa."
+    - "Em 2022 chegou pela primeira vez à América Latina, com a Abstracta como host em Montevidéu. Em 2023 nasceu o WOPR Latam, o primeiro WOPR da história feito inteiramente em espanhol, organizado por Federico Toledo e Andrei Guchín com o apoio de Eric Proegler."

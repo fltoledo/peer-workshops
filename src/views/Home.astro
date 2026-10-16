@@ -1,0 +1,274 @@
+---
+import Base from '../layouts/Base.astro';
+import EditionItem from '../components/EditionItem.astro';
+import SeriesCard from '../components/SeriesCard.astro';
+import { lp, type Lang } from '../i18n';
+import { getEditions, getSeries, getSeriesMap, isUpcoming, participantCount } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    description: 'Peer workshops in the LAWST/WOPR tradition: small groups, real experience reports and open-ended discussion. For the community and for your company.',
+    eyebrow: 'Peer workshops · since 2023',
+    title: 'Real experiences, discussed among peers.',
+    lead: 'We bring software professionals together to share what they lived through in their projects, and to learn in depth from what others lived through. We also run the format inside organizations that want to do the same with their own teams.',
+    ctaParticipate: 'I want to participate',
+    ctaCompany: 'I want this in my company',
+    impactEyebrow: 'Community impact',
+    impactTitle: 'A community that grows with every edition',
+    stats: {
+      editions: ['editions held', 'Since 2023, in different cities.'],
+      countries: ['countries', 'Hosted by local organizations that open their doors to the community.'],
+      participants: ['professionals took part', 'Selected for their experiences, not their job titles.'],
+      reports: ['experiences discussed', 'Real cases, told in the first person and examined in depth by the group.'],
+      themes: ['themes', 'theme', 'One format applied to different topics.'],
+    },
+    impactText: 'In 2023, WOPR Latam became the first WOPR in history run entirely in Spanish. It showed how much it matters to do this in our own language and with our own contexts: professionals solving real problems, with challenges of their own, who until then had no space to discuss them with peers.',
+    upcoming: 'Upcoming editions',
+    formatTitle: 'One format, many themes',
+    formatText: 'Every edition follows the format of the LAWST and WOPR peer workshops. What changes is the topic: each series brings together people working in a specific area.',
+    nextTitle: 'Next?',
+    nextSub: 'Test management, Agentic SDLC…',
+    nextText: 'Do you have a topic that deserves its own workshop, or want to co-organize one? Get in touch.',
+    companyEyebrow: 'For companies',
+    companyTitle: 'The same, with your teams',
+    companyText: 'In a large organization, each team learns on its own what another team already solved. We bring the format to your company and run the whole cycle, so that knowledge flows and turns into action.',
+    companyMore: 'See how it works',
+    companyTalk: "Let's talk",
+    companyList: ['Theme and call design', 'Participant selection', 'Mentoring for presenters', 'Workshop facilitation', 'Harvest report', 'Action plan follow-up'],
+    howTitle: 'How it works',
+    steps: [
+      '<strong>A call opens</strong> with the theme, date and city of the edition.',
+      '<strong>You submit an experience report:</strong> something you lived first-hand that is worth discussing.',
+      '<strong>About 20 people are selected,</strong> looking for the best stories and as much diversity as possible.',
+      '<strong>Three days of workshop:</strong> reports are presented and the group asks, challenges and learns.',
+    ],
+    diffTitle: 'What makes a peer workshop different',
+    diff: [
+      'Nobody comes to sell: you talk about what you did and saw.',
+      '30-minute presentations, discussions with no time limit.',
+      'K-Card facilitation keeps the conversation flowing.',
+      'A safe space: what is confidential stays in the room.',
+      'Free for participants, thanks to the host organizations.',
+    ],
+    diffMore: 'Learn more about the format →',
+    recent: 'Recent editions',
+    all: 'See all editions →',
+  },
+  es: {
+    description: 'Peer workshops al estilo LAWST/WOPR: grupos chicos, reportes de experiencia reales y debate sin límite de tiempo. Para la comunidad y para tu empresa.',
+    eyebrow: 'Talleres entre pares · desde 2023',
+    title: 'Experiencias reales, discutidas entre pares.',
+    lead: 'Reunimos a profesionales de software para compartir lo que vivieron en sus proyectos y aprender en serio de lo que vivieron los demás. También llevamos el formato a organizaciones que quieren hacer lo mismo con sus equipos.',
+    ctaParticipate: 'Quiero participar',
+    ctaCompany: 'Lo quiero en mi empresa',
+    impactEyebrow: 'Impacto en la comunidad',
+    impactTitle: 'Una comunidad que crece con cada edición',
+    stats: {
+      editions: ['ediciones realizadas', 'Desde 2023, en distintas ciudades.'],
+      countries: ['países', 'Hosteadas por organizaciones locales que abren sus puertas a la comunidad.'],
+      participants: ['profesionales participaron', 'Seleccionados por sus experiencias, no por su cargo.'],
+      reports: ['experiencias discutidas', 'Casos reales, en primera persona, analizados a fondo por el grupo.'],
+      themes: ['temáticas', 'temática', 'Un mismo formato aplicado a distintos temas.'],
+    },
+    impactText: 'En 2023, el WOPR Latam fue el primer WOPR de la historia hecho completamente en español. Esa experiencia mostró cuánto suma hacerlo en nuestro idioma y con nuestros contextos: profesionales resolviendo problemas reales, con desafíos propios, que hasta entonces no tenían un espacio para discutirlos entre pares.',
+    upcoming: 'Próximas ediciones',
+    formatTitle: 'Un formato, muchas temáticas',
+    formatText: 'Todas las ediciones comparten el formato de los peer workshops LAWST y WOPR. Lo que cambia es el tema: cada serie reúne a quienes trabajan en un área concreta.',
+    nextTitle: '¿Próxima?',
+    nextSub: 'Gestión de pruebas, Agentic SDLC…',
+    nextText: '¿Tenés un tema que merezca su propio taller, o querés co-organizar uno? Escribinos.',
+    companyEyebrow: 'Para empresas',
+    companyTitle: 'Lo mismo, con tus equipos',
+    companyText: 'En una organización grande, cada equipo aprende por su cuenta lo que otro ya resolvió. Llevamos el formato a tu empresa y nos encargamos de todo el ciclo para que ese conocimiento circule y se convierta en acción.',
+    companyMore: 'Ver cómo funciona',
+    companyTalk: 'Hablemos',
+    companyList: ['Diseño de la temática y la convocatoria', 'Selección de participantes', 'Mentoring de quienes presentan', 'Moderación del taller', 'Reporte de cosecha', 'Follow-up de planes de acción'],
+    howTitle: 'Cómo funciona',
+    steps: [
+      '<strong>Se abre una convocatoria</strong> con la temática, la fecha y la ciudad de la edición.',
+      '<strong>Postulás un reporte de experiencia:</strong> algo que viviste en primera persona y que valga la pena discutir.',
+      '<strong>Se seleccionan unas 20 personas</strong> buscando las mejores historias y la mayor diversidad posible.',
+      '<strong>Tres días de taller:</strong> se presentan los reportes y el grupo pregunta, cuestiona y aprende.',
+    ],
+    diffTitle: 'Lo que hace distinto a un peer workshop',
+    diff: [
+      'Nadie viene a vender: se habla de lo que hiciste y viste.',
+      'Presentaciones de 30 minutos y debates sin límite de tiempo.',
+      'La moderación con K-Cards hace que la conversación fluya.',
+      'Espacio seguro: lo confidencial queda en la sala.',
+      'Gratis para quienes participan, gracias a las organizaciones host.',
+    ],
+    diffMore: 'Conocé el formato en detalle →',
+    recent: 'Ediciones recientes',
+    all: 'Ver todas las ediciones →',
+  },
+  pt: {
+    description: 'Peer workshops no estilo LAWST/WOPR: grupos pequenos, relatos de experiência reais e debate sem limite de tempo. Para a comunidade e para a sua empresa.',
+    eyebrow: 'Workshops entre pares · desde 2023',
+    title: 'Experiências reais, discutidas entre pares.',
+    lead: 'Reunimos profissionais de software para compartilhar o que viveram em seus projetos e aprender de verdade com o que os outros viveram. Também levamos o formato para organizações que querem fazer o mesmo com os seus times.',
+    ctaParticipate: 'Quero participar',
+    ctaCompany: 'Quero na minha empresa',
+    impactEyebrow: 'Impacto na comunidade',
+    impactTitle: 'Uma comunidade que cresce a cada edição',
+    stats: {
+      editions: ['edições realizadas', 'Desde 2023, em diferentes cidades.'],
+      countries: ['países', 'Sediadas por organizações locais que abrem as portas para a comunidade.'],
+      participants: ['profissionais participaram', 'Selecionados pelas suas experiências, não pelo cargo.'],
+      reports: ['experiências discutidas', 'Casos reais, em primeira pessoa, analisados a fundo pelo grupo.'],
+      themes: ['temas', 'tema', 'Um mesmo formato aplicado a diferentes assuntos.'],
+    },
+    impactText: 'Em 2023, o WOPR Latam foi o primeiro WOPR da história feito inteiramente em espanhol. A experiência mostrou o quanto faz diferença fazê-lo no nosso idioma e com os nossos contextos: profissionais resolvendo problemas reais, com desafios próprios, que até então não tinham um espaço para discuti-los entre pares.',
+    upcoming: 'Próximas edições',
+    formatTitle: 'Um formato, muitos temas',
+    formatText: 'Todas as edições seguem o formato dos peer workshops LAWST e WOPR. O que muda é o tema: cada série reúne quem trabalha em uma área específica.',
+    nextTitle: 'Próxima?',
+    nextSub: 'Gestão de testes, Agentic SDLC…',
+    nextText: 'Você tem um tema que merece o seu próprio workshop, ou quer coorganizar um? Fale com a gente.',
+    companyEyebrow: 'Para empresas',
+    companyTitle: 'O mesmo, com os seus times',
+    companyText: 'Em uma organização grande, cada time aprende sozinho o que outro já resolveu. Levamos o formato para a sua empresa e cuidamos de todo o ciclo para que esse conhecimento circule e vire ação.',
+    companyMore: 'Veja como funciona',
+    companyTalk: 'Vamos conversar',
+    companyList: ['Desenho do tema e da chamada', 'Seleção de participantes', 'Mentoria de quem apresenta', 'Facilitação do workshop', 'Relatório de colheita', 'Acompanhamento dos planos de ação'],
+    howTitle: 'Como funciona',
+    steps: [
+      '<strong>Abre-se uma chamada</strong> com o tema, a data e a cidade da edição.',
+      '<strong>Você envia um relato de experiência:</strong> algo que viveu em primeira pessoa e que vale a pena discutir.',
+      '<strong>Cerca de 20 pessoas são selecionadas,</strong> buscando as melhores histórias e a maior diversidade possível.',
+      '<strong>Três dias de workshop:</strong> os relatos são apresentados e o grupo pergunta, questiona e aprende.',
+    ],
+    diffTitle: 'O que torna um peer workshop diferente',
+    diff: [
+      'Ninguém vem vender: fala-se do que você fez e viu.',
+      'Apresentações de 30 minutos e debates sem limite de tempo.',
+      'A facilitação com K-Cards mantém a conversa fluindo.',
+      'Espaço seguro: o que é confidencial fica na sala.',
+      'Gratuito para quem participa, graças às organizações host.',
+    ],
+    diffMore: 'Conheça o formato em detalhe →',
+    recent: 'Edições recentes',
+    all: 'Ver todas as edições →',
+  },
+};
+const t = T[lang];
+
+const series = await getSeries();
+const seriesMap = await getSeriesMap();
+const editions = await getEditions();
+const upcoming = editions.filter(isUpcoming).reverse();
+const past = editions.filter((e) => !isUpcoming(e));
+const recent = past.slice(0, 4);
+const countries = new Set(past.map((e) => e.data.country).filter(Boolean)).size;
+
+// Se muestran solo si las ediciones tienen cargados esos datos.
+const participants = past.reduce((acc, e) => acc + participantCount(e), 0);
+const reports = past.reduce((acc, e) => acc + (e.data.reportsPresented ?? e.data.topics.length), 0);
+
+const impact = [
+  { value: past.length, label: t.stats.editions[0], text: t.stats.editions[1] },
+  { value: countries, label: t.stats.countries[0], text: t.stats.countries[1] },
+  participants > 0 && { value: participants, label: t.stats.participants[0], text: t.stats.participants[1] },
+  reports > 0 && { value: reports, label: t.stats.reports[0], text: t.stats.reports[1] },
+  { value: series.length, label: series.length === 1 ? t.stats.themes[1] : t.stats.themes[0], text: t.stats.themes[2] },
+].filter(Boolean) as { value: number; label: string; text: string }[];
+---
+<Base lang={lang} path="/" description={t.description}>
+  <section class="hero wrap">
+    <p class="eyebrow">{t.eyebrow}</p>
+    <h1>{t.title}</h1>
+    <p class="lead">{t.lead}</p>
+    <div class="actions">
+      <a class="btn btn-primary" href={lp(lang, '/participate')}>{t.ctaParticipate}</a>
+      <a class="btn btn-ghost" href={lp(lang, '/in-company')}>{t.ctaCompany}</a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">{t.impactEyebrow}</p>
+    <h2 style="margin-top: 0">{t.impactTitle}</h2>
+    <div class="grid grid-3">
+      {impact.map((i) => (
+        <div class="card">
+          <div class="stat">{i.value}</div>
+          <h3>{i.label}</h3>
+          <p class="muted">{i.text}</p>
+        </div>
+      ))}
+    </div>
+    <div class="prose" style="margin-top: 28px">
+      <p>{t.impactText}</p>
+    </div>
+  </section>
+
+  {upcoming.length > 0 && (
+    <section class="section wrap">
+      <h2>{t.upcoming}</h2>
+      <ul class="edition-list">
+        {upcoming.map((e) => <EditionItem lang={lang} edition={e} series={seriesMap.get(e.data.series.id)!} />)}
+      </ul>
+    </section>
+  )}
+
+  <section class="section wrap">
+    <h2>{t.formatTitle}</h2>
+    <p class="muted prose">{t.formatText}</p>
+    <div class="grid grid-3">
+      {series.map((s) => (
+        <SeriesCard lang={lang} series={s} count={editions.filter((e) => e.data.series.id === s.id).length} />
+      ))}
+      <a class="card series-card placeholder" href={lp(lang, '/contact?reason=theme')}>
+        <div class="acronym" style="color: var(--muted)">{t.nextTitle}</div>
+        <div class="full">{t.nextSub}</div>
+        <p class="muted">{t.nextText}</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="band">
+      <div>
+        <p class="eyebrow">{t.companyEyebrow}</p>
+        <h2>{t.companyTitle}</h2>
+        <p>{t.companyText}</p>
+        <div class="actions" style="margin-top: 20px">
+          <a class="btn btn-primary" href={lp(lang, '/in-company')}>{t.companyMore}</a>
+          <a class="btn btn-ghost" href={lp(lang, '/contact?reason=in-company')}>{t.companyTalk}</a>
+        </div>
+      </div>
+      <ul>
+        {t.companyList.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <h2>{t.howTitle}</h2>
+    <div class="grid grid-2">
+      <ol class="steps">
+        {t.steps.map((s) => <li set:html={s} />)}
+      </ol>
+      <div class="card">
+        <h3>{t.diffTitle}</h3>
+        <ul>
+          {t.diff.map((d) => <li>{d}</li>)}
+        </ul>
+        <a href={lp(lang, '/format')}>{t.diffMore}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <h2>{t.recent}</h2>
+    <ul class="edition-list">
+      {recent.map((e) => <EditionItem lang={lang} edition={e} series={seriesMap.get(e.data.series.id)!} />)}
+    </ul>
+    <p style="margin-top: 16px"><a href={lp(lang, '/editions')}>{t.all}</a></p>
+  </section>
+
+</Base>

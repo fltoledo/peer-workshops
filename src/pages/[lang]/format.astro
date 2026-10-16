@@ -1,0 +1,8 @@
+---
+import View from '../../views/Format.astro';
+import { langPaths, type Lang } from '../../i18n';
+
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+---
+<View lang={lang} />

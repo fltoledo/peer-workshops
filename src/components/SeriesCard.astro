@@ -1,0 +1,18 @@
+---
+import { UI, lp, type Lang } from '../i18n';
+import { seriesVars, type Series } from '../lib';
+
+interface Props {
+  lang: Lang;
+  series: Series;
+  count: number;
+}
+const { lang, series, count } = Astro.props;
+const s = series.data;
+---
+<a class="card series-card series-scope" href={lp(lang, `/series/${series.id}`)} style={seriesVars(series)}>
+  <div class="acronym">{s.acronym}</div>
+  <div class="full">{s.fullName[lang]}</div>
+  <p class="muted">{s.summary[lang]}</p>
+  <p class="muted"><small>{count} {count === 1 ? UI[lang].edition : UI[lang].editions}</small></p>
+</a>

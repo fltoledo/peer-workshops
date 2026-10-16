@@ -1,0 +1,31 @@
+# TODO: confirmar día exacto, host, organizadores y tema; agregar fotos, participantes y temas tratados.
+series: tapia
+title: "TAPIA #01"
+number: 1
+date: 2026-09-01
+city: Buenos Aires
+country: AR
+host: Abstracta
+organizers: [Federico Toledo]
+status: past
+theme:
+  en: Testing AI-based systems
+  es: Pruebas de sistemas con IA
+  pt: Testes de sistemas com IA
+
+# Ejemplo de cómo cargar fotos, participantes y temas (borrá los # para usarlos):
+# summary:
+#   en: Two sentences about how it went.
+#   es: Dos oraciones sobre cómo salió.
+#   pt: Duas frases sobre como foi.
+# photos:
+#   - src: ./tapia-01/grupo.jpg       # la foto va en src/content/editions/tapia-01/
+#     alt: Grupo de participantes del TAPIA #01 en Buenos Aires
+# participants:
+#   - name: Federico Toledo
+#     org: Abstracta
+#     country: UY
+#     url: https://www.linkedin.com/in/usuario/   # opcional
+# topics:
+#   - title: Evaluar un agente de atención al cliente sin respuestas esperadas fijas
+#     presenter: Nombre Apellido

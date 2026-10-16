@@ -1,0 +1,13 @@
+series: wopr-latam
+title: "WOPR Latam #01"
+number: 1
+date: 2023-11-01
+city: Santiago
+country: CL
+host: Abstracta Chile
+organizers: [Federico Toledo, Andrei Guchín, Eric Proegler]
+status: past
+theme:
+  en: Regional challenges in performance testing
+  es: Desafíos regionales en testing de performance
+  pt: Desafios regionais em testes de performance

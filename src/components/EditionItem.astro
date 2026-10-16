@@ -1,0 +1,26 @@
+---
+import { UI, lp, type Lang } from '../i18n';
+import { editionTheme, editionWhen, editionWhere, seriesVars, type Edition, type Series } from '../lib';
+
+interface Props {
+  lang: Lang;
+  edition: Edition;
+  series: Series;
+}
+const { lang, edition, series } = Astro.props;
+const d = edition.data;
+---
+<li>
+  <a class="edition series-scope" href={lp(lang, `/editions/${edition.id}`)} style={seriesVars(series)}>
+    <span class="when">
+      {d.date || d.city || d.country
+        ? <>{editionWhen(edition, lang)}<br />{editionWhere(edition, lang)}</>
+        : UI[lang].tbd.both}
+    </span>
+    <span>
+      <span class="name">{d.title}</span><br />
+      <span class="theme">{editionTheme(edition, lang)}</span>
+    </span>
+    <span class={`badge badge-${d.status}`}>{UI[lang].status[d.status]}</span>
+  </a>
+</li>

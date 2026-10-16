@@ -1,0 +1,13 @@
+---
+import View from '../../../views/SeriesDetail.astro';
+import { LANGS, type Lang } from '../../../i18n';
+import { getSeries, type Series } from '../../../lib';
+
+export async function getStaticPaths() {
+  const series = await getSeries();
+  return LANGS.flatMap((lang) => series.map((s) => ({ params: { lang, id: s.id }, props: { series: s } })));
+}
+const lang = Astro.params.lang as Lang;
+const { series } = Astro.props as { series: Series };
+---
+<View lang={lang} series={series} />

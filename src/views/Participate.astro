@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+import { lp, type Lang } from '../i18n';
+import { editionTheme, getEditions } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'Participate',
+    description: 'How to apply to a peer workshop and how to put together a good experience report.',
+    h1: 'How to apply',
+    lead: 'Each edition opens its own call. To apply, you propose an experience report on the theme of that edition. You do not need to be an expert: we are looking for real stories told with clarity and authenticity.',
+    openNow: 'Calls open right now:',
+    noneOpen: 'There are no open calls right now.',
+    subscribe: 'Subscribe',
+    subscribeTail: 'and we will let you know when the next one opens.',
+    processTitle: 'The process',
+    process: [
+      'When we organize an edition, we publish an application form.',
+      'You propose an experience report you would like to share with the group.',
+      'We review the proposals and choose about 20, also taking care of the diversity of the group.',
+      'We send the invitations. If someone cannot make it, we invite the next person on the list.',
+      'The ~10 proposals most likely to be presented get a mentor to help prepare the presentation.',
+    ],
+    processNote: 'You can apply as a listener, but that gives you little chance of being invited. Most people who apply are selected at least once: if you are not selected this time, try again. Persistence is valued.',
+    askTitle: 'What we will ask you',
+    ask: [
+      'Name and contact details (email, country, LinkedIn profile).',
+      'Years of experience in software and in the theme of the edition.',
+      'A summary of your technical context: which technologies do you work with?',
+      'Your bio or résumé (optional).',
+      'A summary of your experience report, 3 to 5 paragraphs. It is not mandatory, but it greatly increases your chances.',
+      'Why your experience is relevant to the theme. If you are not proposing a report, tell us what you expect from the workshop.',
+      'Suggestions of other people who might want to apply.',
+    ],
+    commitTitle: 'Your commitment',
+    commit: 'We ask you to be in the city of the edition for the three days, fully dedicated from 9 am to 6 pm. If you cannot block that time, you will not get the most out of the workshop and you would be taking the place of someone else. The workshop is free, but it does not cover travel, lodging or other expenses.',
+    reportTitle: 'How to put together a good experience report',
+    report: 'An experience report describes something you lived first-hand that relates to the theme of the workshop. It is not a conference talk: we are not looking for generalizations, but for concrete details that let the group reason together.',
+    avoid: 'Avoid',
+    avoidText: '“You should do performance testing as early as possible.”',
+    want: 'We look for',
+    wantText: '“Last year we started testing earlier in this way… and we learned that…”',
+    firstPerson: 'Tell it in the first person (“I did”, “I saw”) and include details such as:',
+    details: [
+      'The product or system and the technologies involved.',
+      'The company environment, the people and the team.',
+      'Tools, data collected, results and analysis.',
+      'The sequence of events and the decisions: which ones, when and why.',
+    ],
+    challenges: 'Even successful projects have challenges. Sometimes context forces us to make decisions under pressure that we would not make today: reviewing those decisions is very valuable for the workshop.',
+    criteriaTitle: 'What we value when selecting',
+    criteria: [
+      'It is a real experience of your own, related to the theme of the edition.',
+      'It includes technical or methodological details and makes the learnings clear.',
+      'It has no commercial content about the presenter’s products or services.',
+      'It does not say what “should” be done: it shares what was learned in a concrete case.',
+      'It presents context, details and conclusions; it may include open questions.',
+      'It does not explain basic concepts: we assume the group knows the topic.',
+    ],
+    presentTitle: 'When presenting',
+    present: [
+      'At most 30 minutes: it is the starting point for the conversation that follows.',
+      'Slides are optional but recommended, especially for charts, diagrams or photos. Keep text to a minimum.',
+      'A good flow: context and motivation → details and challenges → results → learnings.',
+      'Do not show confidential information. If you mention something that should not be shared, say so.',
+    ],
+    article: 'If you write an article while preparing your report, we would love to publish it to give it more visibility.',
+  },
+  es: {
+    title: 'Participar',
+    description: 'Cómo postularte a un peer workshop y cómo armar un buen reporte de experiencia.',
+    h1: 'Cómo postularte',
+    lead: 'Cada edición abre una convocatoria propia. Para postular, proponés un reporte de experiencia sobre la temática de esa edición. No hace falta ser experto: buscamos historias reales contadas con claridad y autenticidad.',
+    openNow: 'Convocatorias abiertas ahora:',
+    noneOpen: 'Ahora no hay convocatorias abiertas.',
+    subscribe: 'Suscribite',
+    subscribeTail: 'y te avisamos cuando se abra la próxima.',
+    processTitle: 'El proceso',
+    process: [
+      'Cuando organizamos una edición, publicamos un formulario de postulación.',
+      'Proponés un reporte de experiencia que te gustaría compartir con el grupo.',
+      'Revisamos las propuestas y elegimos unas 20, cuidando también la diversidad del grupo.',
+      'Enviamos las invitaciones. Si alguien no puede, invitamos a la siguiente persona de la lista.',
+      'Las ~10 propuestas con más chances de presentarse reciben un mentor para preparar la presentación.',
+    ],
+    processNote: 'Podés postularte como oyente, pero eso te da pocas chances de ser invitado. La mayoría de quienes se postulan quedan seleccionados al menos una vez: si esta vez no quedás, volvé a intentar. Se valora la persistencia.',
+    askTitle: 'Qué te vamos a pedir',
+    ask: [
+      'Nombre y contacto (email, país, perfil de LinkedIn).',
+      'Años de experiencia en software y en la temática de la edición.',
+      'Un resumen de tu contexto técnico: ¿con qué tecnologías trabajás?',
+      'Tu biografía o CV (opcional).',
+      'Un resumen de tu reporte de experiencia, de 3 a 5 párrafos. No es obligatorio, pero aumenta mucho tus chances.',
+      'Por qué tu experiencia es relevante para el tema. Si no proponés un reporte, contanos qué esperás del taller.',
+      'Sugerencias de otras personas que podrían querer postularse.',
+    ],
+    commitTitle: 'Tu compromiso',
+    commit: 'Pedimos estar en la ciudad de la edición los tres días, con dedicación completa de 9 a 18 hs. Si no vas a poder bloquear ese tiempo, no vas a aprovechar el taller y estarías ocupando el lugar de otra persona. El taller es gratuito, pero no cubre viajes, estadía ni otros gastos.',
+    reportTitle: 'Cómo armar un buen reporte de experiencia',
+    report: 'Un reporte de experiencia describe algo que viviste en primera persona y que se relaciona con el tema del taller. No es una charla de conferencia: no buscamos generalizaciones, sino detalles concretos que permitan al grupo razonar en conjunto.',
+    avoid: 'Evitá',
+    avoidText: '“Hay que hacer pruebas de performance lo antes posible.”',
+    want: 'Buscamos',
+    wantText: '“El año pasado empezamos a probar antes de esta forma… y aprendimos que…”',
+    firstPerson: 'Contá en primera persona (“yo hice”, “yo vi”) y aportá detalles como:',
+    details: [
+      'El producto o sistema y las tecnologías involucradas.',
+      'El entorno de la empresa, las personas y el equipo.',
+      'Herramientas, datos recolectados, resultados y análisis.',
+      'La secuencia de eventos y las decisiones: cuáles, cuándo y por qué.',
+    ],
+    challenges: 'Incluso los proyectos exitosos tienen desafíos. A veces el contexto nos obliga a decidir bajo presión cosas que hoy no haríamos: revisar esas decisiones tiene mucho valor para el taller.',
+    criteriaTitle: 'Lo que valoramos al seleccionar',
+    criteria: [
+      'Es una experiencia real y propia, relacionada con la temática de la edición.',
+      'Tiene detalles técnicos o metodológicos y deja claros los aprendizajes.',
+      'No tiene contenido comercial de productos o servicios de quien presenta.',
+      'No dice lo que “se debe” hacer: comparte lo que se aprendió en un caso concreto.',
+      'Presenta contexto, detalles y conclusiones; puede incluir preguntas abiertas.',
+      'No explica conceptos básicos: asumimos que el grupo conoce el tema.',
+    ],
+    presentTitle: 'Al presentar',
+    present: [
+      'Máximo 30 minutos: es la excusa para la conversación que viene después.',
+      'Las slides son opcionales pero recomendadas, sobre todo para gráficos, diagramas o fotos. Mejor poco texto.',
+      'Un buen hilo: contexto y motivación → detalles y desafíos → resultados → aprendizajes.',
+      'No muestres información confidencial. Si mencionás algo que no debe difundirse, aclaralo.',
+    ],
+    article: 'Si al preparar tu reporte escribís un artículo, nos encantaría publicarlo para darle más visibilidad.',
+  },
+  pt: {
+    title: 'Participar',
+    description: 'Como se inscrever em um peer workshop e como montar um bom relato de experiência.',
+    h1: 'Como se inscrever',
+    lead: 'Cada edição abre a sua própria chamada. Para se inscrever, você propõe um relato de experiência sobre o tema daquela edição. Não é preciso ser especialista: buscamos histórias reais contadas com clareza e autenticidade.',
+    openNow: 'Chamadas abertas agora:',
+    noneOpen: 'No momento não há chamadas abertas.',
+    subscribe: 'Inscreva-se',
+    subscribeTail: 'e avisamos quando abrir a próxima.',
+    processTitle: 'O processo',
+    process: [
+      'Quando organizamos uma edição, publicamos um formulário de inscrição.',
+      'Você propõe um relato de experiência que gostaria de compartilhar com o grupo.',
+      'Revisamos as propostas e escolhemos cerca de 20, cuidando também da diversidade do grupo.',
+      'Enviamos os convites. Se alguém não puder, convidamos a próxima pessoa da lista.',
+      'As ~10 propostas com mais chances de serem apresentadas recebem um mentor para preparar a apresentação.',
+    ],
+    processNote: 'Você pode se inscrever como ouvinte, mas isso dá poucas chances de ser convidado. A maioria das pessoas que se inscrevem é selecionada pelo menos uma vez: se desta vez não for, tente de novo. A persistência é valorizada.',
+    askTitle: 'O que vamos pedir',
+    ask: [
+      'Nome e contato (e-mail, país, perfil no LinkedIn).',
+      'Anos de experiência em software e no tema da edição.',
+      'Um resumo do seu contexto técnico: com quais tecnologias você trabalha?',
+      'Sua biografia ou currículo (opcional).',
+      'Um resumo do seu relato de experiência, de 3 a 5 parágrafos. Não é obrigatório, mas aumenta muito as suas chances.',
+      'Por que a sua experiência é relevante para o tema. Se não for propor um relato, conte o que espera do workshop.',
+      'Sugestões de outras pessoas que talvez queiram se inscrever.',
+    ],
+    commitTitle: 'Seu compromisso',
+    commit: 'Pedimos que você esteja na cidade da edição durante os três dias, com dedicação total das 9h às 18h. Se não puder bloquear esse tempo, você não vai aproveitar o workshop e estaria ocupando o lugar de outra pessoa. O workshop é gratuito, mas não cobre viagens, hospedagem nem outras despesas.',
+    reportTitle: 'Como montar um bom relato de experiência',
+    report: 'Um relato de experiência descreve algo que você viveu em primeira pessoa e que se relaciona com o tema do workshop. Não é uma palestra de conferência: não buscamos generalizações, e sim detalhes concretos que permitam ao grupo raciocinar em conjunto.',
+    avoid: 'Evite',
+    avoidText: '“É preciso fazer testes de performance o quanto antes.”',
+    want: 'Buscamos',
+    wantText: '“No ano passado começamos a testar mais cedo desta forma… e aprendemos que…”',
+    firstPerson: 'Conte em primeira pessoa (“eu fiz”, “eu vi”) e traga detalhes como:',
+    details: [
+      'O produto ou sistema e as tecnologias envolvidas.',
+      'O ambiente da empresa, as pessoas e o time.',
+      'Ferramentas, dados coletados, resultados e análises.',
+      'A sequência de eventos e as decisões: quais, quando e por quê.',
+    ],
+    challenges: 'Até os projetos bem-sucedidos têm desafios. Às vezes o contexto nos obriga a tomar sob pressão decisões que hoje não tomaríamos: revisar essas decisões é muito valioso para o workshop.',
+    criteriaTitle: 'O que valorizamos na seleção',
+    criteria: [
+      'É uma experiência real e própria, relacionada ao tema da edição.',
+      'Traz detalhes técnicos ou metodológicos e deixa claros os aprendizados.',
+      'Não tem conteúdo comercial sobre produtos ou serviços de quem apresenta.',
+      'Não diz o que “se deve” fazer: compartilha o que se aprendeu em um caso concreto.',
+      'Apresenta contexto, detalhes e conclusões; pode incluir perguntas em aberto.',
+      'Não explica conceitos básicos: assumimos que o grupo conhece o tema.',
+    ],
+    presentTitle: 'Ao apresentar',
+    present: [
+      'No máximo 30 minutos: é o ponto de partida para a conversa que vem depois.',
+      'Os slides são opcionais, mas recomendados, principalmente para gráficos, diagramas ou fotos. Use pouco texto.',
+      'Um bom fio condutor: contexto e motivação → detalhes e desafios → resultados → aprendizados.',
+      'Não mostre informações confidenciais. Se mencionar algo que não deve ser divulgado, deixe isso claro.',
+    ],
+    article: 'Se ao preparar o seu relato você escrever um artigo, adoraríamos publicá-lo para dar mais visibilidade.',
+  },
+};
+const t = T[lang];
+const open = (await getEditions()).filter((e) => e.data.status === 'open');
+---
+<Base lang={lang} path="/participate" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.title}</p>
+    <h1>{t.h1}</h1>
+    <p>{t.lead}</p>
+  </header>
+
+  <div class="wrap prose">
+    {open.length > 0 ? (
+      <div class="card" style="border-left: 4px solid var(--ok)">
+        <strong>{t.openNow}</strong>
+        <ul style="margin: 8px 0 0">
+          {open.map((e) => <li><a href={lp(lang, `/editions/${e.id}`)}>{e.data.title}: {editionTheme(e, lang)}</a></li>)}
+        </ul>
+      </div>
+    ) : (
+      <div class="card">
+        {t.noneOpen}{' '}
+        <a href="#newsletter">{t.subscribe}</a> {t.subscribeTail}
+      </div>
+    )}
+
+    <h2>{t.processTitle}</h2>
+    <ol class="steps">
+      {t.process.map((p) => <li>{p}</li>)}
+    </ol>
+    <p class="muted">{t.processNote}</p>
+
+    <h2>{t.askTitle}</h2>
+    <ul>
+      {t.ask.map((a) => <li>{a}</li>)}
+    </ul>
+
+    <h2>{t.commitTitle}</h2>
+    <p>{t.commit}</p>
+
+    <h2 id="report">{t.reportTitle}</h2>
+    <p>{t.report}</p>
+    <div class="grid grid-2" style="margin-bottom: 1em">
+      <div class="card">
+        <p class="eyebrow k-red">{t.avoid}</p>
+        {t.avoidText}
+      </div>
+      <div class="card">
+        <p class="eyebrow k-green">{t.want}</p>
+        {t.wantText}
+      </div>
+    </div>
+    <p>{t.firstPerson}</p>
+    <ul>
+      {t.details.map((d) => <li>{d}</li>)}
+    </ul>
+    <p>{t.challenges}</p>
+
+    <h3>{t.criteriaTitle}</h3>
+    <ul>
+      {t.criteria.map((c) => <li>{c}</li>)}
+    </ul>
+
+    <h3>{t.presentTitle}</h3>
+    <ul>
+      {t.present.map((p) => <li>{p}</li>)}
+    </ul>
+    <p>{t.article}</p>
+  </div>
+</Base>

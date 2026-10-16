@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import EditionItem from '../components/EditionItem.astro';
+import { lp, type Lang } from '../i18n';
+import { getEditions, getSeries, getSeriesMap, isUpcoming, seriesVars } from '../lib';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: { title: 'Editions', h1: 'All editions', description: 'Every peer workshop edition, by theme.', themes: 'Themes:', upcoming: 'Upcoming', past: 'Past editions' },
+  es: { title: 'Ediciones', h1: 'Todas las ediciones', description: 'Todas las ediciones de los peer workshops, por temática.', themes: 'Temáticas:', upcoming: 'Próximas', past: 'Realizadas' },
+  pt: { title: 'Edições', h1: 'Todas as edições', description: 'Todas as edições dos peer workshops, por tema.', themes: 'Temas:', upcoming: 'Próximas', past: 'Realizadas' },
+};
+const t = T[lang];
+
+const series = await getSeries();
+const seriesMap = await getSeriesMap();
+const editions = await getEditions();
+const upcoming = editions.filter(isUpcoming).reverse();
+const past = editions.filter((e) => !isUpcoming(e));
+---
+<Base lang={lang} path="/editions" title={t.title} description={t.description}>
+  <header class="page-head wrap">
+    <p class="eyebrow">{t.title}</p>
+    <h1>{t.h1}</h1>
+    <p>
+      {t.themes}{' '}
+      {series.map((s, i) => (
+        <>{i > 0 && ' · '}<a class="series-scope series-text" href={lp(lang, `/series/${s.id}`)} style={seriesVars(s)}>{s.data.name}</a></>
+      ))}
+    </p>
+  </header>
+  <div class="wrap">
+    {upcoming.length > 0 && (
+      <>
+        <h2>{t.upcoming}</h2>
+        <ul class="edition-list">
+          {upcoming.map((e) => <EditionItem lang={lang} edition={e} series={seriesMap.get(e.data.series.id)!} />)}
+        </ul>
+      </>
+    )}
+    <h2>{t.past}</h2>
+    <ul class="edition-list">
+      {past.map((e) => <EditionItem lang={lang} edition={e} series={seriesMap.get(e.data.series.id)!} />)}
+    </ul>
+  </div>
+</Base>
