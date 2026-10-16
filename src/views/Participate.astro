@@ -41,6 +41,7 @@ const T = {
     commit: 'We ask you to be in the city of the edition for the three days, fully dedicated from 9 am to 6 pm. If you cannot block that time, you will not get the most out of the workshop and you would be taking the place of someone else. The workshop is free, but it does not cover travel, lodging or other expenses.',
     reportTitle: 'How to put together a good experience report',
     report: 'An experience report describes something you lived first-hand that relates to the theme of the workshop. It is not a conference talk: we are not looking for generalizations, but for concrete details that let the group reason together.',
+    reportVideo: 'Leandro Melendez (Señor Performo) recorded <a href="https://drive.google.com/drive/folders/12lgY4Y5A5szZdCDEjWPL1fOPJTSFzaYx" target="_blank" rel="noopener">a video of less than 4 minutes</a> (in Spanish) that helps you understand how to put together your experience report and how the workshop works.',
     avoid: 'Avoid',
     avoidText: '“You should do performance testing as early as possible.”',
     want: 'We look for',
@@ -103,6 +104,7 @@ const T = {
     commit: 'Pedimos estar en la ciudad de la edición los tres días, con dedicación completa de 9 a 18 hs. Si no vas a poder bloquear ese tiempo, no vas a aprovechar el taller y estarías ocupando el lugar de otra persona. El taller es gratuito, pero no cubre viajes, estadía ni otros gastos.',
     reportTitle: 'Cómo armar un buen reporte de experiencia',
     report: 'Un reporte de experiencia describe algo que viviste en primera persona y que se relaciona con el tema del taller. No es una charla de conferencia: no buscamos generalizaciones, sino detalles concretos que permitan al grupo razonar en conjunto.',
+    reportVideo: 'Leandro Melendez (el Señor Performo) grabó <a href="https://drive.google.com/drive/folders/12lgY4Y5A5szZdCDEjWPL1fOPJTSFzaYx" target="_blank" rel="noopener">un video de menos de 4 minutos</a> que ayuda a entender cómo armar tu reporte de experiencia y cómo funciona el taller.',
     avoid: 'Evitá',
     avoidText: '“Hay que hacer pruebas de performance lo antes posible.”',
     want: 'Buscamos',
@@ -165,6 +167,7 @@ const T = {
     commit: 'Pedimos que você esteja na cidade da edição durante os três dias, com dedicação total das 9h às 18h. Se não puder bloquear esse tempo, você não vai aproveitar o workshop e estaria ocupando o lugar de outra pessoa. O workshop é gratuito, mas não cobre viagens, hospedagem nem outras despesas.',
     reportTitle: 'Como montar um bom relato de experiência',
     report: 'Um relato de experiência descreve algo que você viveu em primeira pessoa e que se relaciona com o tema do workshop. Não é uma palestra de conferência: não buscamos generalizações, e sim detalhes concretos que permitam ao grupo raciocinar em conjunto.',
+    reportVideo: 'Leandro Melendez (o Señor Performo) gravou <a href="https://drive.google.com/drive/folders/12lgY4Y5A5szZdCDEjWPL1fOPJTSFzaYx" target="_blank" rel="noopener">um vídeo de menos de 4 minutos</a> (em espanhol) que ajuda a entender como montar o seu relato de experiência e como funciona o workshop.',
     avoid: 'Evite',
     avoidText: '“É preciso fazer testes de performance o quanto antes.”',
     want: 'Buscamos',
@@ -237,6 +240,7 @@ const open = (await getEditions()).filter((e) => e.data.status === 'open');
 
     <h2 id="report">{t.reportTitle}</h2>
     <p>{t.report}</p>
+    <p set:html={t.reportVideo} />
     <div class="grid grid-2" style="margin-bottom: 1em">
       <div class="card">
         <p class="eyebrow k-red">{t.avoid}</p>

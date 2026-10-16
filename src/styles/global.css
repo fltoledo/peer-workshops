@@ -1183,3 +1183,26 @@ main:focus {
 .hero-photo picture {
   display: block;
 }
+
+/* Host list */
+.hosts {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.hosts > li {
+  margin: 0;
+}
+
+.hosts h3 {
+  margin: 0 0 8px;
+}
+
+.hosts ul {
+  margin: 0;
+  padding-left: 1.1em;
+}

@@ -12,7 +12,7 @@ const { lang, edition } = Astro.props;
 
 const T = {
   en: {
-    facts: 'Edition details', when: 'When', where: 'Where', host: 'Host', organizers: 'Organizers', theme: 'Theme', language: 'Language', role: 'Federico’s role', contentOwner: 'Content Owner', official: 'Official page',
+    facts: 'Edition details', when: 'When', where: 'Where', host: 'Host', organizers: 'Organizers', theme: 'Theme', venue: 'Venue', language: 'Language', role: 'Federico’s role', contentOwner: 'Content Owner', official: 'Official page',
     openTitle: 'Call open', deadline: 'Applications until', apply: 'Apply', ask: 'Ask us', guide: 'How to put together a good experience report →',
     plannedTitle: 'Coming soon', plannedText: 'Date, place and theme will be announced soon. The call is not open yet.', notify: 'Let me know when it opens',
     closedTitle: 'Applications closed', closedText: 'We are selecting participants. Subscribe to hear about the next edition.',
@@ -20,7 +20,7 @@ const T = {
     summary: 'How it went', photos: 'Photos', openPhoto: 'open full size', participants: 'Participants', topics: 'Topics discussed', by: 'by',
   },
   es: {
-    facts: 'Datos de la edición', when: 'Cuándo', where: 'Dónde', host: 'Host', organizers: 'Organización', theme: 'Temática', language: 'Idioma', role: 'Rol de Federico', contentOwner: 'Content Owner', official: 'Página oficial',
+    facts: 'Datos de la edición', when: 'Cuándo', where: 'Dónde', host: 'Host', organizers: 'Organización', theme: 'Temática', venue: 'Sede', language: 'Idioma', role: 'Rol de Federico', contentOwner: 'Content Owner', official: 'Página oficial',
     openTitle: 'Convocatoria abierta', deadline: 'Postulaciones hasta el', apply: 'Postularme', ask: 'Consultar', guide: 'Cómo armar un buen reporte de experiencia →',
     plannedTitle: 'Próximamente', plannedText: 'Pronto anunciamos fecha, lugar y temática. La convocatoria todavía no está abierta.', notify: 'Avisame cuando abra',
     closedTitle: 'Postulaciones cerradas', closedText: 'Ya estamos seleccionando participantes. Suscribite para enterarte de la próxima edición.',
@@ -28,7 +28,7 @@ const T = {
     summary: 'Cómo fue', photos: 'Fotos', openPhoto: 'ver en tamaño completo', participants: 'Participantes', topics: 'Temas tratados', by: 'por',
   },
   pt: {
-    facts: 'Dados da edição', when: 'Quando', where: 'Onde', host: 'Host', organizers: 'Organização', theme: 'Tema', language: 'Idioma', role: 'Papel de Federico', contentOwner: 'Content Owner', official: 'Página oficial',
+    facts: 'Dados da edição', when: 'Quando', where: 'Onde', host: 'Host', organizers: 'Organização', theme: 'Tema', venue: 'Local', language: 'Idioma', role: 'Papel de Federico', contentOwner: 'Content Owner', official: 'Página oficial',
     openTitle: 'Inscrições abertas', deadline: 'Inscrições até', apply: 'Inscrever-me', ask: 'Fale com a gente', guide: 'Como montar um bom relato de experiência →',
     plannedTitle: 'Em breve', plannedText: 'Em breve anunciaremos data, local e tema. A chamada ainda não está aberta.', notify: 'Avise-me quando abrir',
     closedTitle: 'Inscrições encerradas', closedText: 'Estamos selecionando participantes. Inscreva-se para saber da próxima edição.',
@@ -75,6 +75,7 @@ const count = participantCount(edition);
           <dt>{t.when}</dt><dd>{editionWhen(edition, lang)}</dd>
           <dt>{t.where}</dt><dd>{editionWhere(edition, lang)}</dd>
           {d.host && <><dt>{t.host}</dt><dd>{d.host}</dd></>}
+          {d.venue && <><dt>{t.venue}</dt><dd>{d.venue}</dd></>}
           {d.organizers.length > 0 && <><dt>{t.organizers}</dt><dd>{d.organizers.join(', ')}</dd></>}
           {d.contentOwner && <><dt>{t.contentOwner}</dt><dd>{d.contentOwner}</dd></>}
           {theme && <><dt>{t.theme}</dt><dd>{theme}</dd></>}

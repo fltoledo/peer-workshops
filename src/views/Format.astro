@@ -37,6 +37,7 @@ const T = {
     photoFront: 'The three K-Cards used at WOPR Latam: green “I want to propose!”, yellow “I want to add!” and red “I want to speak now!”',
     photoBack: 'The back of the cards, with the instructions for when to use each one',
     kMore: 'The dynamic is explained at the workshop, but it helps to arrive with an idea of how it works. Leandro Melendez (Señor Performo) explains it in <a href="https://www.youtube.com/watch?v=CHlF6iCjHzE" target="_blank" rel="noopener">a video of less than 4 minutes</a> (in Spanish), based on WOPR 2022 in Uruguay.',
+    kSim: 'To see it in action, watch this <a href="https://www.youtube.com/watch?v=qkvrMXH1VFQ" target="_blank" rel="noopener">explanation and simulation of an experience report</a> on the Codigio channel (in Spanish), with Antonio Jiménez, who has taken part in several workshops, and Jenifer Sánchez, co-organizer of the 2024 edition in Colombia.',
     agendaTitle: 'Typical agenda',
     agendaNote: 'This is a reference and is adjusted for each edition.',
     day0Title: 'Day 0 · 7 pm',
@@ -83,6 +84,7 @@ const T = {
     photoFront: 'Las tres K-Cards del WOPR Latam: verde “¡Quiero proponer!”, amarilla “¡Quiero agregar!” y roja “¡Quiero hablar ya!”',
     photoBack: 'El dorso de las tarjetas, con las instrucciones de cuándo usar cada una',
     kMore: 'La dinámica se explica en el taller, pero conviene llegar con una idea. Leandro Melendez (el Señor Performo) la explica en <a href="https://www.youtube.com/watch?v=CHlF6iCjHzE" target="_blank" rel="noopener">un video de menos de 4 minutos</a>, basado en el WOPR 2022 en Uruguay.',
+    kSim: 'Para verlo en acción, mirá esta <a href="https://www.youtube.com/watch?v=qkvrMXH1VFQ" target="_blank" rel="noopener">explicación y simulación de un reporte de experiencia</a> en el canal Codigio, con Antonio Jiménez, que ya participó en varios talleres, y Jenifer Sánchez, co-organizadora de la edición de Colombia 2024.',
     agendaTitle: 'Agenda típica',
     agendaNote: 'Es una referencia y se ajusta en cada edición.',
     day0Title: 'Día 0 · 19:00',
@@ -129,6 +131,7 @@ const T = {
     photoFront: 'Os três K-Cards do WOPR Latam: verde “¡Quiero proponer!”, amarelo “¡Quiero agregar!” e vermelho “¡Quiero hablar ya!”',
     photoBack: 'O verso dos cartões, com as instruções de quando usar cada um',
     kMore: 'A dinâmica é explicada no workshop, mas vale a pena chegar com uma ideia. Leandro Melendez (o Señor Performo) a explica em <a href="https://www.youtube.com/watch?v=CHlF6iCjHzE" target="_blank" rel="noopener">um vídeo de menos de 4 minutos</a> (em espanhol), baseado no WOPR 2022 no Uruguai.',
+    kSim: 'Para ver na prática, assista a esta <a href="https://www.youtube.com/watch?v=qkvrMXH1VFQ" target="_blank" rel="noopener">explicação e simulação de um relato de experiência</a> no canal Codigio (em espanhol), com Antonio Jiménez, que já participou de vários workshops, e Jenifer Sánchez, coorganizadora da edição da Colômbia em 2024.',
     agendaTitle: 'Agenda típica',
     agendaNote: 'É uma referência e é ajustada em cada edição.',
     day0Title: 'Dia 0 · 19h',
@@ -183,6 +186,7 @@ const t = T[lang];
       <Picture src={kBack} alt={t.photoBack} formats={['avif', 'webp']} widths={[400, 640, 1040]} width={640} sizes="(max-width: 760px) calc(100vw - 40px), 520px" quality={65} loading="lazy" />
     </div>
     <p set:html={t.kMore} />
+    <p set:html={t.kSim} />
 
     <h2>{t.agendaTitle}</h2>
     <p class="muted">{t.agendaNote}</p>

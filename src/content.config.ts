@@ -40,6 +40,8 @@ const editions = defineCollection({
       city: z.string().optional(),
       country: z.string().length(2).optional(), // código ISO: UY, AR, BR, US...
       host: z.string().optional(),
+      // Lugar concreto, si no es el host (p. ej. una universidad)
+      venue: z.string().optional(),
       organizers: z.array(z.string()).default([]),
       contentOwner: z.string().optional(),
       // Página oficial de la edición, si existe
