@@ -6,7 +6,7 @@ city: Lima
 country: PE
 host: Testing Perú
 venue: Colegio de Ingenieros del Perú
-organizers: [Federico Toledo, Andrei Guchín]
+organizers: [Federico Toledo, Andrei Guchín, Jorge Paz]
 status: past
 theme:
   en: Performance testing failures
