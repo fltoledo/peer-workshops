@@ -70,11 +70,34 @@ Si las URLs quedan vacías, el pie muestra un enlace a `NEWSLETTER.fallbackUrl` 
 
 Usa [Web3Forms](https://web3forms.com) (gratis). Pedí una clave con tu email y pegala en `web3formsKey` en `src/config.ts`. La clave es pública: solo sirve para mandarte mails a vos. Cada mensaje incluye el idioma desde el que se envió.
 
+## Chequeos automáticos
+
+Cada pull request y cada push a `main` corren estos chequeos en GitHub Actions. Si alguno falla, el sitio **no se publica**.
+
+| Chequeo | Qué protege |
+|---|---|
+| `npm run check` | Errores de tipos, y que cada texto exista en inglés, español y portugués (si falta uno, falla e indica cuál). |
+| `npm run build` | Que el sitio compile y que los datos de ediciones y temáticas cumplan el formato. |
+| `tests/links.spec.ts` | Que todas las páginas, enlaces internos e imágenes respondan. |
+| `tests/navigation.spec.ts` | Redirección por idioma, selector de idioma, migas de pan, menú en celular, contenido del home y fotos. |
+| `tests/forms.spec.ts` | Formulario de contacto (campos para empresas) y newsletter. Los envíos se simulan: nunca mandan mails ni suscriben a nadie. |
+| `tests/a11y.spec.ts` | WCAG 2.2 AA con axe en todas las páginas, en modo claro y oscuro. |
+
+Para correrlos en tu máquina:
+
+```bash
+npx playwright install chromium   # solo la primera vez
+npm run verify                    # tipos + build + pruebas
+npm run test:ui                   # pruebas con interfaz visual, para ver qué falla
+```
+
+Si un chequeo falla en GitHub, el reporte de Playwright queda como artefacto del workflow (pestaña Actions → la ejecución → *playwright-report*).
+
 ## Publicar en GitHub Pages
 
 1. Creá un repo en GitHub (por ejemplo `peer-workshops`) y subí este proyecto a la rama `main`.
 2. En el repo: Settings → Pages → Source: **GitHub Actions**.
-3. Cada push a `main` publica el sitio (ver `.github/workflows/deploy.yml`).
+3. Cada push a `main` publica el sitio, si pasan los chequeos (ver `.github/workflows/deploy.yml`).
 
 ### Dominio propio
 

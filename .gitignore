@@ -5,3 +5,7 @@ dist/
 
 # Configuración local de Claude Code
 .claude/
+
+# Resultados de pruebas
+test-results/
+playwright-report/
