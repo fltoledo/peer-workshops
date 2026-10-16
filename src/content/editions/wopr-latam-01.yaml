@@ -11,3 +11,9 @@ theme:
   en: Regional challenges in performance testing
   es: Desafíos regionales en testing de performance
   pt: Desafios regionais em testes de performance
+photos:
+  - src: ../../assets/2023.jpeg
+    alt:
+      en: Group photo of WOPR Latam #01 participants in Santiago
+      es: Foto grupal de quienes participaron del WOPR Latam #01 en Santiago
+      pt: Foto do grupo de participantes do WOPR Latam #01 em Santiago

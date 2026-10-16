@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import kFront from '../assets/k-cards.jpeg';
+import kBack from '../assets/k-cards-back.jpeg';
 import { lp, type Lang } from '../i18n';
 
 interface Props {
@@ -27,11 +30,12 @@ const T = {
     kTitle: 'K-Card facilitation',
     kText: 'Facilitation has two roles. The <strong>Content Owner</strong> decides which report is presented at each moment and gives each person advance notice. The <strong>facilitator</strong> keeps the conversation in order using K-Cards: colored cards that participants raise to ask for the floor.',
     cards: [
-      ['k-green', 'Green', 'New thread: a new question or topic.'],
-      ['k-yellow', 'Yellow', 'I want to continue the current thread.'],
-      ['k-red', 'Red', 'Urgent: I cannot go on without saying this.'],
-      ['k-purple', 'Purple', '<em>Rat hole</em>: we went off on a tangent, let’s get back.'],
+      ['k-green', 'Green · Propose a topic', 'Raise it to open a new topic or a question different from the one being discussed. Very useful at the end of a presentation to spark new discussions.'],
+      ['k-yellow', 'Yellow · Add to the topic', 'Raise it to add a comment or question on the current topic. If your point drifts too far from it, use a green card instead. Don’t worry: every topic gets its turn.'],
+      ['k-red', 'Red · Speak now', 'Raise it when you need to speak right away: the current conversation stops. Use it with care; if it is abused, the facilitator may take it away.'],
     ],
+    photoFront: 'The three K-Cards used at WOPR Latam: green “I want to propose!”, yellow “I want to add!” and red “I want to speak now!”',
+    photoBack: 'The back of the cards, with the instructions for when to use each one',
     kMore: 'The dynamic is explained at the workshop, but it helps to arrive with an idea of how it works. Leandro Melendez (Señor Performo) explains it in a video of less than 4 minutes, based on WOPR 2022 in Uruguay.',
     agendaTitle: 'Typical agenda',
     agendaNote: 'This is a reference and is adjusted for each edition.',
@@ -72,11 +76,12 @@ const T = {
     kTitle: 'Moderación con K-Cards',
     kText: 'Hay dos roles en la facilitación. Quien oficia de <strong>Content Owner</strong> decide qué reporte se presenta en cada momento y avisa con tiempo a cada persona. Quien <strong>modera</strong> ordena la conversación con K-Cards: tarjetas de colores que cada participante levanta para pedir la palabra.',
     cards: [
-      ['k-green', 'Verde', 'Nuevo hilo: una pregunta o tema nuevo.'],
-      ['k-yellow', 'Amarilla', 'Sigo el hilo actual.'],
-      ['k-red', 'Roja', 'Urgente: no puedo seguir sin decir esto.'],
-      ['k-purple', 'Violeta', '<em>Rat hole</em>: nos fuimos por las ramas, volvamos.'],
+      ['k-green', 'Verde · Proponé un tema', 'Mostrala cuando quieras abrir un nuevo tema o una pregunta distinta a lo que se conversa. Es muy útil al cierre de las presentaciones para disparar nuevas discusiones.'],
+      ['k-yellow', 'Amarilla · Agregá al tema', 'Mostrala para sumar un comentario o pregunta sobre el tema actual. Si tu aporte se va demasiado de tema, mejor usá una tarjeta verde. Tranquilidad: todos los temas se tratarán.'],
+      ['k-red', 'Roja · Hablá ya', 'Mostrala cuando necesites hablar ya mismo: se detiene la conversación actual. Usala con cuidado; si abusás, quien modera puede retirártela.'],
     ],
+    photoFront: 'Las tres K-Cards del WOPR Latam: verde “¡Quiero proponer!”, amarilla “¡Quiero agregar!” y roja “¡Quiero hablar ya!”',
+    photoBack: 'El dorso de las tarjetas, con las instrucciones de cuándo usar cada una',
     kMore: 'La dinámica se explica en el taller, pero conviene llegar con una idea. Leandro Melendez (el Señor Performo) la explica en un video de menos de 4 minutos, basado en el WOPR 2022 en Uruguay.',
     agendaTitle: 'Agenda típica',
     agendaNote: 'Es una referencia y se ajusta en cada edición.',
@@ -117,11 +122,12 @@ const T = {
     kTitle: 'Facilitação com K-Cards',
     kText: 'A facilitação tem dois papéis. Quem atua como <strong>Content Owner</strong> decide qual relato é apresentado em cada momento e avisa cada pessoa com antecedência. Quem <strong>facilita</strong> organiza a conversa com K-Cards: cartões coloridos que cada participante levanta para pedir a palavra.',
     cards: [
-      ['k-green', 'Verde', 'Novo fio: uma pergunta ou tema novo.'],
-      ['k-yellow', 'Amarelo', 'Quero continuar o fio atual.'],
-      ['k-red', 'Vermelho', 'Urgente: não consigo seguir sem dizer isto.'],
-      ['k-purple', 'Roxo', '<em>Rat hole</em>: saímos do assunto, vamos voltar.'],
+      ['k-green', 'Verde · Proponha um tema', 'Mostre quando quiser abrir um tema novo ou uma pergunta diferente do que está sendo conversado. É muito útil no fim das apresentações para disparar novas discussões.'],
+      ['k-yellow', 'Amarelo · Some ao tema', 'Mostre para acrescentar um comentário ou pergunta sobre o tema atual. Se a sua contribuição se afastar demais do tema, use um cartão verde. Fique tranquilo: todos os temas serão tratados.'],
+      ['k-red', 'Vermelho · Fale já', 'Mostre quando precisar falar imediatamente: a conversa atual é interrompida. Use com cuidado; se houver abuso, quem facilita pode retirá-lo.'],
     ],
+    photoFront: 'Os três K-Cards do WOPR Latam: verde “¡Quiero proponer!”, amarelo “¡Quiero agregar!” e vermelho “¡Quiero hablar ya!”',
+    photoBack: 'O verso dos cartões, com as instruções de quando usar cada um',
     kMore: 'A dinâmica é explicada no workshop, mas vale a pena chegar com uma ideia. Leandro Melendez (o Señor Performo) a explica em um vídeo de menos de 4 minutos, baseado no WOPR 2022 no Uruguai.',
     agendaTitle: 'Agenda típica',
     agendaNote: 'É uma referência e é ajustada em cada edição.',
@@ -164,10 +170,17 @@ const t = T[lang];
 
     <h2 id="k-cards">{t.kTitle}</h2>
     <p set:html={t.kText} />
-    <div class="grid grid-2" style="margin-bottom: 1em">
+    <ul class="kcards">
       {t.cards.map(([cls, name, text]) => (
-        <div class="card"><strong class={cls}>{name}</strong> · <span set:html={text} /></div>
+        <li class={`card kcard ${cls}-border`}>
+          <strong class={cls}>{name}</strong>
+          <p>{text}</p>
+        </li>
       ))}
+    </ul>
+    <div class="kcards-photos">
+      <Image src={kFront} alt={t.photoFront} widths={[400, 800, 1200]} sizes="(max-width: 760px) 100vw, 540px" />
+      <Image src={kBack} alt={t.photoBack} widths={[400, 800, 1200]} sizes="(max-width: 760px) 100vw, 540px" />
     </div>
     <p>{t.kMore}</p>
 

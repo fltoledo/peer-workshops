@@ -11,3 +11,14 @@ theme:
   en: Performance challenges during the COVID-19 pandemic
   es: Desafíos de performance durante la pandemia COVID-19
   pt: Desafios de performance durante a pandemia de COVID-19
+photos:
+  - src: ../../assets/2024-medellin.jpeg
+    alt:
+      en: Participants seated around tables listening to a presenter in a bright room in Medellín
+      es: Participantes sentados alrededor de las mesas escuchando a quien presenta, en una sala luminosa de Medellín
+      pt: Participantes sentados ao redor das mesas ouvindo quem apresenta, em uma sala iluminada de Medellín
+  - src: ../../assets/2024.jpg
+    alt:
+      en: Two participants talking on stools during a break, with the city visible through the windows
+      es: Dos participantes conversando sentados en banquetas durante un corte, con la ciudad de fondo
+      pt: Dois participantes conversando em banquetas durante um intervalo, com a cidade ao fundo

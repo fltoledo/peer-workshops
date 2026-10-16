@@ -13,7 +13,6 @@
   --k-green: #08765a;
   --k-yellow: #8a5d00;
   --k-red: #b42318;
-  --k-purple: #6a3fd1;
   --radius: 14px;
   --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.05);
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -37,7 +36,6 @@
     --k-green: #3cc79c;
     --k-yellow: #f0c24b;
     --k-red: #ff8a80;
-    --k-purple: #b9a2ff;
     --shadow: none;
     color-scheme: dark;
   }
@@ -894,7 +892,6 @@ img {
 .k-green { color: var(--k-green); }
 .k-yellow { color: var(--k-yellow); }
 .k-red { color: var(--k-red); }
-.k-purple { color: var(--k-purple); }
 
 .req {
   color: var(--danger);
@@ -1105,6 +1102,7 @@ main:focus {
   height: 220px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: 50% 25%;
 }
 
 @media (max-width: 640px) {
@@ -1133,4 +1131,43 @@ main:focus {
   .hero-photo::before {
     background: rgb(12 11 9 / 0.76);
   }
+}
+
+/* K-Cards */
+.kcards {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.kcard {
+  margin: 0;
+  border-left-width: 6px;
+}
+
+.kcard p {
+  margin: 4px 0 0;
+}
+
+.k-green-border { border-left-color: #2ea043; }
+.k-yellow-border { border-left-color: #e3b300; }
+.k-red-border { border-left-color: #e0245e; }
+
+.wrap.prose > .kcards-photos {
+  max-width: 1080px;
+}
+
+.kcards-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 1em;
+}
+
+.kcards-photos img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
 }
