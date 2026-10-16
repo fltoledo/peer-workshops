@@ -15,7 +15,7 @@ const d = edition.data;
     <span class="when">
       {d.date || d.city || d.country
         ? <>{editionWhen(edition, lang)}<br />{editionWhere(edition, lang)}</>
-        : UI[lang].tbd.both}
+        : <>{d.expectedYear && <strong class="year">{d.expectedYear}</strong>}{UI[lang].tbd.both}</>}
     </span>
     <span>
       <span class="name">{d.title}</span><br />

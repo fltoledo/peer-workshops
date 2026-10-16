@@ -9,8 +9,10 @@ export async function getSeries() {
   return all.sort((a, b) => a.data.order - b.data.order);
 }
 
-// Las ediciones sin fecha definida se consideran las más futuras.
-const sortKey = (e: Edition) => e.data.date?.getTime() ?? Number.MAX_SAFE_INTEGER;
+// Sin fecha: al final del año previsto, o como la más futura si tampoco hay año.
+const sortKey = (e: Edition) =>
+  e.data.date?.getTime() ??
+  (e.data.expectedYear ? Date.UTC(e.data.expectedYear, 11, 31) : Number.MAX_SAFE_INTEGER);
 
 /** Ediciones de la más futura a la más antigua. Sin fecha, en el orden de las temáticas. */
 export async function getEditions() {
@@ -29,8 +31,11 @@ export const isUpcoming = (e: Edition) => e.data.status !== 'past';
 /** Un texto que puede venir en un solo idioma o traducido. */
 export const tx = (value: string | Localized, lang: Lang) => (typeof value === 'string' ? value : value[lang]);
 
-export const editionWhen = (e: Edition, lang: Lang) =>
-  e.data.date ? formatMonth(e.data.date, lang, e.data.datePrecision) : UI[lang].tbd.date;
+export const editionWhen = (e: Edition, lang: Lang) => {
+  if (e.data.date) return formatMonth(e.data.date, lang, e.data.datePrecision);
+  if (e.data.expectedYear) return `${e.data.expectedYear} · ${UI[lang].tbd.date.toLowerCase()}`;
+  return UI[lang].tbd.date;
+};
 
 export const editionWhere = (e: Edition, lang: Lang) => {
   const { city, country } = e.data;

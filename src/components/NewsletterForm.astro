@@ -4,8 +4,10 @@ import { type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
+  /** 'footer': bloque con título (una vez por página, con id="newsletter"). 'inline': solo el formulario, p. ej. en el hero. */
+  variant?: 'footer' | 'inline';
 }
-const { lang } = Astro.props;
+const { lang, variant = 'footer' } = Astro.props;
 
 const T = {
   en: {
@@ -13,6 +15,7 @@ const T = {
     text: 'One email when a call opens. Unsubscribe anytime from any email.',
     label: 'Your email',
     button: 'Subscribe',
+    inlineButton: 'Keep me posted',
     sending: 'Subscribing…',
     ok: 'Done! If you get a confirmation email, open it to complete your subscription.',
     error: 'We could not subscribe you. Please try again in a few minutes.',
@@ -23,6 +26,7 @@ const T = {
     text: 'Un mail cuando se abre una convocatoria. Te das de baja cuando quieras desde cualquier mail.',
     label: 'Tu email',
     button: 'Suscribirme',
+    inlineButton: 'Quiero enterarme',
     sending: 'Suscribiendo…',
     ok: '¡Listo! Si te llega un mail de confirmación, abrilo para completar la suscripción.',
     error: 'No pudimos suscribirte. Probá de nuevo en unos minutos.',
@@ -33,6 +37,7 @@ const T = {
     text: 'Um e-mail quando abrir uma chamada. Cancele quando quiser, a partir de qualquer e-mail.',
     label: 'Seu e-mail',
     button: 'Inscrever-me',
+    inlineButton: 'Quero saber',
     sending: 'Inscrevendo…',
     ok: 'Pronto! Se você receber um e-mail de confirmação, abra-o para concluir a inscrição.',
     error: 'Não foi possível fazer a inscrição. Tente novamente em alguns minutos.',
@@ -41,27 +46,47 @@ const T = {
 };
 const t = T[lang];
 const action = NEWSLETTER.formActions[lang];
+const inputId = `newsletter-email-${variant}`;
+
 ---
-<section class="newsletter" id="newsletter" aria-labelledby="newsletter-title" tabindex="-1">
-  <div>
-    <h2 class="h3" id="newsletter-title">{t.title}</h2>
-    <p class="muted">{t.text}</p>
-  </div>
-  {action ? (
-    <form class="newsletter-form" action={action} method="post" data-sending={t.sending} data-ok={t.ok} data-error={t.error}>
-      <label for="newsletter-email" class="sr-only">{t.label}</label>
-      <input id="newsletter-email" type="email" name="email_address" required autocomplete="email" placeholder={t.label} />
-      <button class="btn btn-primary" type="submit">{t.button}</button>
-      <p class="form-status" role="status"></p>
-    </form>
+<Fragment>
+  {variant === 'footer' ? (
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title" tabindex="-1">
+      <div>
+        <h2 class="h3" id="newsletter-title">{t.title}</h2>
+        <p class="muted">{t.text}</p>
+      </div>
+      <div>
+        {action ? (
+          <form class="newsletter-form" action={action} method="post" data-sending={t.sending} data-ok={t.ok} data-error={t.error}>
+            <label for={inputId} class="sr-only">{t.label}</label>
+            <input id={inputId} type="email" name="email_address" required autocomplete="email" placeholder={t.label} />
+            <button class="btn btn-primary" type="submit">{t.button}</button>
+            <p class="form-status" role="status"></p>
+          </form>
+        ) : (
+          <a class="btn btn-primary" href={NEWSLETTER.fallbackUrl} target="_blank" rel="noopener">{t.fallback}</a>
+        )}
+      </div>
+    </section>
   ) : (
-    <a class="btn btn-primary" href={NEWSLETTER.fallbackUrl} target="_blank" rel="noopener">{t.fallback}</a>
+    <div class="newsletter-inline">
+      {action ? (
+        <form class="newsletter-form" action={action} method="post" data-sending={t.sending} data-ok={t.ok} data-error={t.error}>
+          <label for={inputId} class="sr-only">{t.label}</label>
+          <input id={inputId} type="email" name="email_address" required autocomplete="email" placeholder={t.label} />
+          <button class="btn btn-primary" type="submit">{t.inlineButton}</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      ) : (
+        <a class="btn btn-primary" href={NEWSLETTER.fallbackUrl} target="_blank" rel="noopener">{t.fallback}</a>
+      )}
+    </div>
   )}
-</section>
+</Fragment>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('.newsletter-form');
-  if (form) {
+  document.querySelectorAll<HTMLFormElement>('.newsletter-form').forEach((form) => {
     const status = form.querySelector('.form-status')!;
     const msg = form.dataset;
     form.addEventListener('submit', async (event) => {
@@ -87,5 +112,5 @@ const action = NEWSLETTER.formActions[lang];
         status.textContent = msg.error!;
       }
     });
-  }
+  });
 </script>

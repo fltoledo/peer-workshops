@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import { lp, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const T = {
+  en: {
+    title: 'About me',
+    description: 'Federico Toledo, organizer and facilitator of the peer workshops: testing, communities, teaching and facilitation.',
+    eyebrow: 'About me',
+    lead: 'I organize and facilitate these workshops. I have spent my career in software testing and quality, building communities and teaching, and that background is part of what each workshop brings to the room.',
+    photoAlt: 'Federico Toledo',
+    sections: [
+      {
+        h: 'How I came to peer workshops',
+        p: [
+          'I took part in two editions of the original WOPR, where Paul Holland facilitated conversations among more than 20 people using K-Cards. I liked the method so much that I started using it in large meetings at Abstracta and in meetups, until I was comfortable facilitating with it myself.',
+          'In 2022 WOPR came to Latin America for the first time, in Montevideo, and since then I have organized WOPR Latam together with Andrei Guchín. In 2023 it became the first peer workshop run entirely in Spanish. I am grateful to Eric Proegler for trusting us to bring the format to Spanish-speaking countries.',
+          'In 2026 we took the same format to a new topic with TAPIA, a workshop on testing AI-based systems.',
+        ],
+      },
+      {
+        h: 'Testing and quality',
+        p: [
+          'I am co-founder and Chief Quality Officer at Abstracta, a software quality company. Testing is the field I have worked in my whole career: performance, automation, test strategy and, more recently, testing of AI-based systems.',
+        ],
+      },
+      {
+        h: 'Community, teaching and writing',
+        p: [
+          'I have spent years building testing communities in the region, organizing events and creating spaces where practitioners can learn from each other. I teach, and I write about testing on my blog and in my book <em>Introducción a las pruebas de sistemas de información</em>, now in its third edition (2024) and free to download.',
+        ],
+      },
+      {
+        h: 'I co-organize every edition',
+        p: [
+          'I rarely organize a workshop alone. For WOPR Latam I co-organize with Andrei Guchín. In other editions I join forces with a local organizer who knows the city and the community, or with a subject-matter expert on the main theme, as in Medellín 2024 with Leandro Melendez and Jenifer Sánchez.',
+          'If you would like to co-organize an edition on a topic you know well, I would love to hear from you.',
+        ],
+      },
+      {
+        h: 'What this means for your company',
+        p: [
+          'When I run a workshop inside an organization, I bring more than facilitation: I understand the technical problems your teams discuss, I can mentor speakers so their stories land, and I can turn the conversation into a harvest report and an action plan that make sense for a quality and engineering organization.',
+        ],
+      },
+    ],
+    links: 'Find me',
+    blog: 'My blog (in Spanish)',
+    ctaTitle: 'Want to talk?',
+    ctaText: 'To co-organize an edition, host one, or bring a workshop to your company.',
+    cta: 'Get in touch',
+  },
+  es: {
+    title: 'Sobre mí',
+    description: 'Federico Toledo, organizador y moderador de los peer workshops: testing, comunidades, docencia y facilitación.',
+    eyebrow: 'Sobre mí',
+    lead: 'Organizo y modero estos talleres. Hice toda mi carrera en testing y calidad de software, generando comunidades y enseñando, y ese recorrido es parte de lo que cada taller suma.',
+    photoAlt: 'Federico Toledo',
+    sections: [
+      {
+        h: 'Cómo llegué a los peer workshops',
+        p: [
+          'Participé en dos ediciones del WOPR original, donde Paul Holland moderaba con K-Cards las conversaciones de más de 20 personas. Me gustó tanto el método que empecé a usarlo en reuniones multitudinarias en Abstracta y en meetups, hasta sentirme cómodo moderando con él.',
+          'En 2022 el WOPR llegó por primera vez a Latinoamérica, en Montevideo, y desde entonces organizo el WOPR Latam junto a Andrei Guchín. En 2023 fue el primer peer workshop hecho completamente en español. Le agradezco a Eric Proegler la confianza para llevar el formato a los países de habla hispana.',
+          'En 2026 llevamos el mismo formato a un tema nuevo con TAPIA, un taller sobre pruebas de sistemas con inteligencia artificial.',
+        ],
+      },
+      {
+        h: 'Testing y calidad',
+        p: [
+          'Soy cofundador y Chief Quality Officer de Abstracta, una empresa de calidad de software. El testing es el área en la que trabajé toda mi carrera: performance, automatización, estrategia de pruebas y, más recientemente, pruebas de sistemas con IA.',
+        ],
+      },
+      {
+        h: 'Comunidad, docencia y escritura',
+        p: [
+          'Hace años que impulso comunidades de testing en la región, organizando eventos y generando espacios donde profesionales aprenden unos de otros. Soy docente y escribo sobre testing en mi blog y en mi libro <em>Introducción a las pruebas de sistemas de información</em>, que va por su tercera edición (2024) y se puede descargar gratis.',
+        ],
+      },
+      {
+        h: 'Cada edición la co-organizo',
+        p: [
+          'Casi nunca organizo un taller solo. Los WOPR Latam los co-organizo con Andrei Guchín. En otras ediciones me sumo a alguien local que conoce la ciudad y la comunidad, o a alguien experto en la temática principal, como en Medellín 2024 con Leandro Melendez y Jenifer Sánchez.',
+          'Si te gustaría co-organizar una edición sobre un tema que conocés bien, me encantaría que me escribas.',
+        ],
+      },
+      {
+        h: 'Lo que esto suma para tu empresa',
+        p: [
+          'Cuando hago un taller dentro de una organización, aporto más que la moderación: entiendo los problemas técnicos que discuten tus equipos, puedo acompañar a quienes presentan para que su historia llegue, y convertir la conversación en un reporte de cosecha y un plan de acción que tengan sentido para un área de calidad e ingeniería.',
+        ],
+      },
+    ],
+    links: 'Dónde encontrarme',
+    blog: 'Mi blog',
+    ctaTitle: '¿Hablamos?',
+    ctaText: 'Para co-organizar una edición, ser host o llevar un taller a tu empresa.',
+    cta: 'Escribime',
+  },
+  pt: {
+    title: 'Sobre mim',
+    description: 'Federico Toledo, organizador e facilitador dos peer workshops: testes, comunidades, docência e facilitação.',
+    eyebrow: 'Sobre mim',
+    lead: 'Organizo e facilito estes workshops. Fiz toda a minha carreira em testes e qualidade de software, criando comunidades e ensinando, e essa trajetória é parte do que cada workshop traz.',
+    photoAlt: 'Federico Toledo',
+    sections: [
+      {
+        h: 'Como cheguei aos peer workshops',
+        p: [
+          'Participei de duas edições do WOPR original, onde Paul Holland facilitava com K-Cards as conversas de mais de 20 pessoas. Gostei tanto do método que comecei a usá-lo em reuniões grandes na Abstracta e em meetups, até me sentir à vontade facilitando com ele.',
+          'Em 2022 o WOPR chegou pela primeira vez à América Latina, em Montevidéu, e desde então organizo o WOPR Latam junto com Andrei Guchín. Em 2023 ele foi o primeiro peer workshop feito inteiramente em espanhol. Agradeço a Eric Proegler pela confiança para levar o formato aos países de língua espanhola.',
+          'Em 2026 levamos o mesmo formato a um tema novo com o TAPIA, um workshop sobre testes de sistemas com inteligência artificial.',
+        ],
+      },
+      {
+        h: 'Testes e qualidade',
+        p: [
+          'Sou cofundador e Chief Quality Officer da Abstracta, uma empresa de qualidade de software. Testes são a área em que trabalhei durante toda a minha carreira: performance, automação, estratégia de testes e, mais recentemente, testes de sistemas com IA.',
+        ],
+      },
+      {
+        h: 'Comunidade, docência e escrita',
+        p: [
+          'Há anos impulsiono comunidades de testes na região, organizando eventos e criando espaços onde profissionais aprendem uns com os outros. Sou professor e escrevo sobre testes no meu blog e no meu livro <em>Introducción a las pruebas de sistemas de información</em>, que está na terceira edição (2024) e pode ser baixado gratuitamente.',
+        ],
+      },
+      {
+        h: 'Coorganizo cada edição',
+        p: [
+          'Quase nunca organizo um workshop sozinho. Os WOPR Latam eu coorganizo com Andrei Guchín. Em outras edições me junto a alguém local que conhece a cidade e a comunidade, ou a alguém especialista no tema principal, como em Medellín 2024 com Leandro Melendez e Jenifer Sánchez.',
+          'Se você gostaria de coorganizar uma edição sobre um tema que conhece bem, adoraria que me escrevesse.',
+        ],
+      },
+      {
+        h: 'O que isso agrega para a sua empresa',
+        p: [
+          'Quando faço um workshop dentro de uma organização, trago mais do que a facilitação: entendo os problemas técnicos que os seus times discutem, posso acompanhar quem apresenta para que a história chegue bem, e transformar a conversa em um relatório de colheita e um plano de ação que façam sentido para uma área de qualidade e engenharia.',
+        ],
+      },
+    ],
+    links: 'Onde me encontrar',
+    blog: 'Meu blog (em espanhol)',
+    ctaTitle: 'Vamos conversar?',
+    ctaText: 'Para coorganizar uma edição, ser host ou levar um workshop para a sua empresa.',
+    cta: 'Fale comigo',
+  },
+};
+const t = T[lang];
+
+// Foto opcional: poné un archivo llamado about.jpg (o .jpeg, .png, .webp) en src/assets/.
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/about.{jpg,jpeg,png,webp}', { eager: true });
+const photo = Object.values(photos)[0]?.default;
+---
+<Base lang={lang} path="/about" title={t.title} description={t.description}>
+  <header class="page-head wrap about-head">
+    <div>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>Federico Toledo</h1>
+      <p>{t.lead}</p>
+    </div>
+    {photo && <Image class="about-photo" src={photo} alt={t.photoAlt} width={320} height={320} />}
+  </header>
+
+  <div class="wrap prose">
+    {t.sections.map((s) => (
+      <section>
+        <h2>{s.h}</h2>
+        {s.p.map((p) => <p set:html={p} />)}
+      </section>
+    ))}
+
+    <h2>{t.links}</h2>
+    <ul>
+      <li><a href="https://federico-toledo.com" target="_blank" rel="noopener">{t.blog}</a></li>
+      <li><a href="https://abstracta.us" target="_blank" rel="noopener">Abstracta</a></li>
+    </ul>
+
+    <div class="callout">
+      <div>
+        <h2 class="h3">{t.ctaTitle}</h2>
+        <p>{t.ctaText}</p>
+      </div>
+      <a class="btn btn-primary" href={lp(lang, '/contact')}>{t.cta}</a>
+    </div>
+  </div>
+</Base>

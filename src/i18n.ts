@@ -41,7 +41,7 @@ export function countryName(code: string, lang: Lang) {
 // Textos comunes a todo el sitio.
 export const UI = {
   en: {
-    nav: { home: 'Home', editions: 'Editions', format: 'The format', participate: 'Participate', host: 'Host', contact: 'Contact', company: 'For companies' },
+    nav: { home: 'Home', editions: 'Editions', format: 'The format', participate: 'Participate', host: 'Host', about: 'About me', contact: 'Contact', company: 'For companies' },
     skip: 'Skip to content',
     menu: 'Menu',
     language: 'Language',
@@ -53,7 +53,7 @@ export const UI = {
     tbd: { date: 'Date to be announced', place: 'Location to be announced', both: 'Date and location to be announced', theme: 'Theme to be announced' },
   },
   es: {
-    nav: { home: 'Inicio', editions: 'Ediciones', format: 'El formato', participate: 'Participar', host: 'Ser host', contact: 'Contacto', company: 'Para empresas' },
+    nav: { home: 'Inicio', editions: 'Ediciones', format: 'El formato', participate: 'Participar', host: 'Ser host', about: 'Sobre mí', contact: 'Contacto', company: 'Para empresas' },
     skip: 'Saltar al contenido',
     menu: 'Menú',
     language: 'Idioma',
@@ -65,7 +65,7 @@ export const UI = {
     tbd: { date: 'Fecha a definir', place: 'Lugar a definir', both: 'Fecha y lugar a definir', theme: 'Tema a definir' },
   },
   pt: {
-    nav: { home: 'Início', editions: 'Edições', format: 'O formato', participate: 'Participar', host: 'Ser host', contact: 'Contato', company: 'Para empresas' },
+    nav: { home: 'Início', editions: 'Edições', format: 'O formato', participate: 'Participar', host: 'Ser host', about: 'Sobre mim', contact: 'Contato', company: 'Para empresas' },
     skip: 'Pular para o conteúdo',
     menu: 'Menu',
     language: 'Idioma',
@@ -84,6 +84,7 @@ export const NAV = [
   { key: 'format', path: '/format' },
   { key: 'participate', path: '/participate' },
   { key: 'host', path: '/host' },
+  { key: 'about', path: '/about' },
   { key: 'contact', path: '/contact' },
   { key: 'company', path: '/in-company', cta: true },
 ] as const;

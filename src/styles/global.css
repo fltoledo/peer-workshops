@@ -155,6 +155,7 @@ img {
 }
 
 .brand {
+  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -183,9 +184,10 @@ img {
 .site-nav a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
-  padding: 6px 12px;
+  white-space: nowrap;
+  padding: 6px 10px;
   border-radius: 999px;
 }
 
@@ -208,7 +210,7 @@ img {
   color: var(--text);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1140px) {
   .nav-toggle {
     display: block;
   }
@@ -304,8 +306,68 @@ img {
 
 /* Hero */
 .hero {
+  position: relative;
   padding-top: 72px;
   padding-bottom: 24px;
+}
+
+.hero-note {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.newsletter-inline {
+  max-width: 520px;
+  margin-top: 28px;
+}
+
+/* Hero with background photo: dark overlay keeps text contrast AA in both themes */
+.hero-photo {
+  padding-top: 96px;
+  padding-bottom: 72px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+}
+
+.hero-photo .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.hero-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(12 11 9 / 0.86) 0%, rgb(12 11 9 / 0.72) 55%, rgb(12 11 9 / 0.45) 100%);
+}
+
+.hero.hero-photo .eyebrow {
+  color: #f6b98c;
+}
+
+.hero.hero-photo .lead,
+.hero.hero-photo .hero-note {
+  color: #ece7de;
+}
+
+.hero-photo a {
+  color: #fff;
+}
+
+.hero-photo .form-status.ok {
+  color: #7ee2c0;
+}
+
+.hero-photo .form-status.error {
+  color: #ffb3ab;
 }
 
 .hero h1 {
@@ -758,7 +820,7 @@ img {
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1140px) {
   .site-nav a.nav-cta {
     margin: 8px 0 0;
     text-align: center;
@@ -868,7 +930,7 @@ main:focus {
   background: var(--surface-2);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1140px) {
   .lang-switch {
     margin: 8px 0 0;
     padding: 8px 0 0;
@@ -1021,5 +1083,54 @@ main:focus {
   .newsletter {
     grid-template-columns: 1fr;
     padding: 22px;
+  }
+}
+
+.edition .year {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* About */
+.about-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+
+.about-photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .about-head {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo {
+    width: 140px;
+    height: 140px;
+    order: -1;
+  }
+}
+
+/* Long-text pages: keep the reading column left-aligned with the page header */
+.wrap.prose {
+  max-width: 1080px;
+}
+
+.wrap.prose > * {
+  max-width: 720px;
+}
+
+/* On narrow screens the text spans the full width: use an even overlay so it stays AA over any photo */
+@media (max-width: 760px) {
+  .hero-photo::before {
+    background: rgb(12 11 9 / 0.76);
   }
 }

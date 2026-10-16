@@ -31,6 +31,8 @@ const editions = defineCollection({
       title: z.string(),
       number: z.number().optional(),
       date: z.coerce.date().optional(),
+      // Año previsto, si todavía no hay fecha (p. ej. 2027)
+      expectedYear: z.number().optional(),
       datePrecision: z.enum(['month', 'year']).default('month'),
       city: z.string().optional(),
       country: z.string().length(2).optional(), // código ISO: UY, AR, BR, US...
