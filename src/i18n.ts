@@ -55,7 +55,7 @@ export const UI = {
     status: { planned: 'Coming soon', open: 'Call open', closed: 'Applications closed', past: 'Held' },
     edition: 'edition',
     editions: 'editions',
-    inLanguage: 'In', myRole: { organizer: 'Organizer', host: 'Host' },
+    inLanguage: 'In', myRole: { organizer: 'Organizers', host: 'Host' },
     tbd: { date: 'Date to be announced', place: 'Location to be announced', both: 'Date and location to be announced', theme: 'Theme to be announced' },
   },
   es: {
@@ -68,7 +68,7 @@ export const UI = {
     status: { planned: 'Próximamente', open: 'Convocatoria abierta', closed: 'Postulaciones cerradas', past: 'Realizada' },
     edition: 'edición',
     editions: 'ediciones',
-    inLanguage: 'En', myRole: { organizer: 'Organizador', host: 'Host' },
+    inLanguage: 'En', myRole: { organizer: 'Organización', host: 'Host' },
     tbd: { date: 'Fecha a definir', place: 'Lugar a definir', both: 'Fecha y lugar a definir', theme: 'Tema a definir' },
   },
   pt: {
@@ -81,7 +81,7 @@ export const UI = {
     status: { planned: 'Em breve', open: 'Inscrições abertas', closed: 'Inscrições encerradas', past: 'Realizada' },
     edition: 'edição',
     editions: 'edições',
-    inLanguage: 'Em', myRole: { organizer: 'Organizador', host: 'Host' },
+    inLanguage: 'Em', myRole: { organizer: 'Organização', host: 'Host' },
     tbd: { date: 'Data a definir', place: 'Local a definir', both: 'Data e local a definir', theme: 'Tema a definir' },
   },
 } satisfies Record<Lang, unknown>;
