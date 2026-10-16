@@ -11,6 +11,9 @@ theme:
   en: Observability
   es: Observabilidad
   pt: Observabilidade
+# Foto de fondo del encabezado y su encuadre
+cover: ../../assets/2025-2.jpeg
+coverPosition: 50% 20%
 photos:
   - src: ../../assets/2025-3.jpg
     alt:

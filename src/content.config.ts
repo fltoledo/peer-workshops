@@ -60,6 +60,8 @@ const editions = defineCollection({
       // Fotos: rutas relativas a este archivo, p. ej. ./wopr-latam-02/grupo.jpg
       // Foto de fondo del encabezado (si no se indica, se usa la primera de `photos`)
       cover: image().optional(),
+      // Encuadre de la foto de fondo (CSS object-position), p. ej. '50% 20%' para mostrar más la parte de arriba
+      coverPosition: z.string().optional(),
       photos: z
         .array(z.object({ src: image(), alt: text, caption: text.optional() }))
         .default([]),

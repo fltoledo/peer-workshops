@@ -67,6 +67,7 @@ const count = participantCount(edition);
     {cover && (
       <Picture
         class="hero-bg"
+        style={d.coverPosition ? `object-position: ${d.coverPosition}` : undefined}
         src={cover}
         alt=""
         formats={['avif', 'webp']}
