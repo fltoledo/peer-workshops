@@ -165,7 +165,8 @@ const t = T[lang];
 const heroFiles = import.meta.glob<{ default: ImageMetadata }>('../assets/hero.{jpg,jpeg,png,webp}', { eager: true });
 const heroImage = Object.values(heroFiles)[0]?.default;
 
-const series = await getSeries();
+// Solo las temáticas propias (el WOPR original no se muestra en el home)
+const series = (await getSeries()).filter((s) => s.data.own);
 const seriesMap = await getSeriesMap();
 const editions = await getEditions();
 const upcoming = editions.filter(isUpcoming).reverse();

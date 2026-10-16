@@ -14,6 +14,8 @@ const series = defineCollection({
     acronym: z.string(),
     order: z.number().default(99),
     website: z.string().url().optional(),
+    // false para temáticas que no organiza Federico (p. ej. el WOPR original): no aparecen en el home
+    own: z.boolean().default(true),
     // Color de texto en modo claro y en modo oscuro (ambos deben dar contraste AA ≥ 4.5:1)
     color: z.string(),
     colorDark: z.string(),
