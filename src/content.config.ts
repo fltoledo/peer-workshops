@@ -1,4 +1,5 @@
-import { defineCollection, reference, z } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const localized = z.object({ en: z.string(), es: z.string(), pt: z.string() });
@@ -13,7 +14,7 @@ const series = defineCollection({
     name: z.string(),
     acronym: z.string(),
     order: z.number().default(99),
-    website: z.string().url().optional(),
+    website: z.url().optional(),
     // false para temáticas que no organiza Federico (p. ej. el WOPR original): no aparecen en el home
     own: z.boolean().default(true),
     // Color de texto en modo claro y en modo oscuro (ambos deben dar contraste AA ≥ 4.5:1)
@@ -45,7 +46,7 @@ const editions = defineCollection({
       organizers: z.array(z.string()).default([]),
       contentOwner: z.string().optional(),
       // Página oficial de la edición, si existe
-      url: z.string().url().optional(),
+      url: z.url().optional(),
       // Idioma en el que se hizo la edición
       language: z.enum(['es', 'en', 'pt']).default('es'),
       // Rol de Federico en la edición
@@ -53,7 +54,7 @@ const editions = defineCollection({
       theme: localized.optional(),
       // planned: anunciada · open: convocatoria abierta · closed: postulaciones cerradas · past: ya se hizo
       status: z.enum(['planned', 'open', 'closed', 'past']),
-      applyUrl: z.string().url().optional(),
+      applyUrl: z.url().optional(),
       applyDeadline: z.coerce.date().optional(),
       // Resumen de lo que pasó (opcional)
       summary: localized.optional(),
@@ -71,7 +72,7 @@ const editions = defineCollection({
             name: z.string(),
             org: z.string().optional(),
             country: z.string().length(2).optional(),
-            url: z.string().url().optional(), // LinkedIn u otro perfil
+            url: z.url().optional(), // LinkedIn u otro perfil
           }),
         )
         .default([]),
